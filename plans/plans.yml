@@ -1,0 +1,24 @@
+plans:
+  - name: Merchant Integration
+    description: Standard merchant integration plan for accepting Paidy payments. Paidy operates on a merchant fee model rather than tiered API access plans. Merchants are charged a percentage fee per transaction (typically 2.5-3.5% depending on volume and business type). Access to the full Payments API, Tokens API, and Paidy Checkout is included for all integrated merchants. API keys (test and production) are provisioned through the Merchant Dashboard after merchant onboarding.
+    url: https://paidy.com/merchant/
+    status: active
+    pricingModel: transaction-fee
+    currency: JPY
+    features:
+      - Paidy Checkout JavaScript integration
+      - Payments API (authorize, capture, refund, close, update, retrieve)
+      - Tokens API (create, suspend, resume, delete, retrieve)
+      - Test environment with test API keys
+      - Webhook notifications for all payment and token events
+      - Merchant Dashboard access
+      - Support for both standard one-time payments and recurring token payments
+    rateLimit:
+      requests: unspecified
+      period: unspecified
+      notes: No documented rate limits in Paidy API specification
+    notes: >
+      Paidy does not publish tiered API plans. All merchants receive full API access upon onboarding.
+      Merchant fees (approximately 2.5–3.5% per transaction) are negotiated directly with Paidy/PayPal
+      (PayPal acquired Paidy in 2021). Currency is JPY only. Contact Paidy merchant support for
+      custom fee arrangements based on transaction volume.

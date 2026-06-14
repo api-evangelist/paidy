@@ -1,0 +1,38 @@
+rateLimits:
+  - name: Paidy API Rate Limits
+    description: Paidy does not publish explicit rate limit thresholds in their public API documentation. The API uses HTTPS with Bearer token authentication and requires TLS 1.2+. No documented request-per-second or request-per-minute caps appear in the official Paidy API reference as of June 2026.
+    scope: global
+    documented: false
+    notes: >
+      No explicit rate limits are documented in the Paidy API specification (version 2018-04-10).
+      Merchants experiencing throttling or capacity issues should contact Paidy merchant support
+      via the Merchant Dashboard at https://merchant.paidy.com/.
+    technicalConstraints:
+      - name: Webhook Response Timeout
+        value: 10
+        unit: seconds
+        description: Webhook endpoint must respond within 10 seconds with HTTP 200 or Paidy will consider delivery failed and retry with exponential backoff.
+      - name: Webhook Retry Window
+        value: 5
+        unit: hours
+        description: Paidy retries failed webhook deliveries with exponential backoff; final retry attempts occur approximately 5 hours after the first retry.
+      - name: Metadata Key-Value Pairs
+        value: 20
+        unit: pairs
+        description: Maximum of 20 key-value pairs allowed in metadata objects per payment or token request.
+      - name: API Version Header
+        value: "2018-04-10"
+        unit: header
+        description: Requests must include Paidy-Version header set to 2018-04-10; omitting this header may result in errors.
+      - name: TLS Minimum Version
+        value: "1.2"
+        unit: version
+        description: All API communications require TLS 1.2 or higher. HTTP calls fail.
+    whitelistedIPs:
+      description: Merchants must whitelist these Paidy IP addresses for webhook delivery
+      addresses:
+        - 13.114.134.35
+        - 13.113.94.100
+        - 18.182.135.232
+        - 52.199.50.20
+        - 52.199.62.26

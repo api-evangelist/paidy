@@ -1,0 +1,32 @@
+finops:
+  - name: Paidy Merchant Transaction Fees
+    description: Paidy charges merchants a percentage-based transaction fee for each payment processed through the Paidy network. No separate API access fee or subscription cost is charged. The merchant absorbs the fee (consumers pay no interest for monthly consolidated billing or 3-installment payments).
+    currency: JPY
+    model: transaction-percentage
+    documented: false
+    estimatedFeeRange:
+      low: 2.5
+      high: 3.5
+      unit: percent
+      notes: Estimated range based on third-party industry sources. Actual fees are negotiated directly with Paidy/PayPal and vary by merchant volume, industry, and business type.
+    consumerFees:
+      description: Consumers pay no fees for monthly lump-sum payment or three-installment payment plans. Fees may apply for extended installment plans (e.g., 6-month plans on Amazon Japan). Late payment fees apply for missed billing deadlines.
+      standardPlans:
+        - name: Monthly Lump Sum (翌月一括)
+          consumerFee: none
+          description: Consumer pays full amount in the following month via bank transfer, convenience store, or direct debit.
+        - name: Three Installments (3回分割)
+          consumerFee: none
+          description: Interest-free split over three monthly payments.
+        - name: Six Installments (6回分割)
+          consumerFee: varies
+          description: Available on select merchant platforms (e.g., Amazon Japan). Fees may apply depending on payment method used.
+    notes: >
+      Paidy was acquired by PayPal in 2021 for approximately $2.7 billion USD, making it PayPal's
+      largest acquisition at the time. Merchant fee negotiations now go through PayPal/Paidy merchant
+      onboarding. All transactions are denominated in JPY; no multi-currency support.
+      API access itself has no subscription or usage-based cost beyond the per-transaction merchant fee.
+    contacts:
+      - type: MerchantInquiry
+        url: https://paidy.com/merchant/
+        description: Contact Paidy merchant support for fee negotiation and onboarding
