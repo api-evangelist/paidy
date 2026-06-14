@@ -1,0 +1,113 @@
+vocabulary:
+  - term: payment
+    definition: >
+      A Paidy payment object representing a deferred payment transaction created via the
+      REST API. Payments begin in "authorized" status and transition to "closed" after
+      capture or explicit closure.
+    type: object
+    context: Paidy Payments API
+
+  - term: token
+    definition: >
+      A Paidy payment token representing a consumer's stored payment authorization for
+      recurring billing. Created via Paidy Checkout and used by merchants to charge
+      consumers on a scheduled basis.
+    type: object
+    context: Paidy Tokens API
+
+  - term: capture
+    definition: >
+      The act of collecting funds from an authorized Paidy payment. Moves the payment
+      status from "authorized" to "closed". A capture object records the amount, items,
+      and metadata for each capture event.
+    type: action/object
+    context: Paidy Payments API
+
+  - term: refund
+    definition: >
+      A reversal of a captured Paidy payment, either full or partial. Requires a
+      capture_id and optionally an amount. A refund object records the refunded amount,
+      reason, and associated capture.
+    type: action/object
+    context: Paidy Payments API
+
+  - term: authorization
+    definition: >
+      The initial approval of a Paidy payment. An authorized payment reserves funds and
+      has an expiration deadline. Authorization happens when a payment is created
+      via POST /payments.
+    type: concept
+    context: Paidy Payments API
+
+  - term: BNPL
+    definition: >
+      Buy Now, Pay Later — a deferred payment model where consumers receive goods
+      immediately and pay later via consolidated monthly billing. Paidy's core service model.
+    type: concept
+    context: General / Industry
+
+  - term: secret_key
+    definition: >
+      A merchant's private API key prefixed with "sk_". Used in the Authorization Bearer
+      header for all Paidy REST API requests. Must never be shared or exposed client-side.
+    type: credential
+    context: Authentication
+
+  - term: public_key
+    definition: >
+      A merchant's public-facing API key prefixed with "pk_". Used exclusively in the
+      Paidy Checkout JavaScript integration. Safe to expose in client-side code.
+    type: credential
+    context: Authentication
+
+  - term: wallet_id
+    definition: >
+      A merchant-defined grouping identifier for tokens. Allows merchants to segment
+      tokens into logical wallets. Defaults to "default" if not specified.
+    type: parameter
+    context: Paidy Tokens API
+
+  - term: metadata
+    definition: >
+      A key-value map attached to payments, captures, refunds, or tokens. Allows merchants
+      to store custom data. Maximum of 20 keys per object.
+    type: parameter
+    context: Paidy Payments and Tokens API
+
+  - term: buyer_data
+    definition: >
+      Consumer purchasing history data provided by the merchant when creating a payment.
+      Used by Paidy's risk assessment model. Includes lifetime value (ltv), order count,
+      billing address, and other behavioral signals.
+    type: object
+    context: Paidy Payments API
+
+  - term: Paidy-Version
+    definition: >
+      An HTTP request header specifying the API version date. The recommended value is
+      "2018-04-10". Omitting this header or providing an incorrect value may result in
+      a "version.unknown" error.
+    type: header
+    context: API Versioning
+
+  - term: ltv
+    definition: >
+      Lifetime Value — the total spending amount in JPY by the consumer on the merchant's
+      platform. A required field in buyer_data used for Paidy risk assessment.
+    type: field
+    context: Paidy Payments API / buyer_data
+
+  - term: recurring
+    definition: >
+      A payment type facilitated by stored Paidy tokens. Recurring payments allow merchants
+      to charge consumers periodically without requiring a new Paidy Checkout session each time.
+    type: concept
+    context: Paidy Tokens API
+
+  - term: suspension
+    definition: >
+      A state where a token is temporarily deactivated and cannot be used for new payments.
+      Tokens can be suspended by consumers, merchants, or fraud detection systems, and
+      resumed later.
+    type: concept
+    context: Paidy Tokens API

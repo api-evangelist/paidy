@@ -31,7 +31,7 @@ apis:
       - type: Documentation
         url: https://paidy.com/docs/en/payments.html
       - type: OpenAPI
-        url: https://paidy.com/docs/api/en/
+        url: https://raw.githubusercontent.com/api-evangelist/paidy/refs/heads/main/openapi/openapi.yml
       - type: Authentication
         url: https://paidy.com/docs/api/en/#section/Authentication
       - type: Webhooks
@@ -65,7 +65,7 @@ apis:
       - type: Documentation
         url: https://paidy.com/docs/en/tokens.html
       - type: OpenAPI
-        url: https://paidy.com/docs/api/en/
+        url: https://raw.githubusercontent.com/api-evangelist/paidy/refs/heads/main/openapi/openapi.yml
       - type: Authentication
         url: https://paidy.com/docs/api/en/#section/Authentication
       - type: Webhooks

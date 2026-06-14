@@ -1,0 +1,7 @@
+{
+  "wallet_id": "default",
+  "reason": {
+    "code": "merchant.requested",
+    "description": "Pausing subscription at merchant request"
+  }
+}

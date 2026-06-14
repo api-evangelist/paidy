@@ -1,0 +1,8 @@
+{
+  "capture_id": "cap_example123456",
+  "amount": 2500,
+  "reason": "Customer returned item",
+  "metadata": {
+    "return_ref": "return_20260613_001"
+  }
+}

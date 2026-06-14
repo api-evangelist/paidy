@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paidy/main/json-schema/payment.json",
+  "title": "Payment",
+  "description": "A Paidy payment object representing a deferred payment authorization, capture, or refund.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique payment ID (begins with pay_)",
+      "pattern": "^pay_",
+      "example": "pay_example123456"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current payment status",
+      "enum": ["authorized", "closed", "rejected"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 expiration deadline for the authorization"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Total payment amount in JPY"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency code; always JPY",
+      "enum": ["JPY"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Payment description"
+    },
+    "store_name": {
+      "type": "string",
+      "description": "Merchant store name shown to the consumer"
+    },
+    "test": {
+      "type": "boolean",
+      "description": "True if this is a test payment"
+    },
+    "tier": {
+      "type": "string",
+      "description": "Payment tier",
+      "example": "classic"
+    },
+    "buyer": {
+      "$ref": "#/$defs/Buyer"
+    },
+    "order": {
+      "$ref": "#/$defs/Order"
+    },
+    "shipping_address": {
+      "$ref": "#/$defs/Address"
+    },
+    "captures": {
+      "type": "array",
+      "description": "List of captures for this payment",
+      "items": {
+        "$ref": "#/$defs/Capture"
+      }
+    },
+    "refunds": {
+      "type": "array",
+      "description": "List of refunds for this payment",
+      "items": {
+        "$ref": "#/$defs/Refund"
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    }
+  },
+  "$defs": {
+    "Buyer": {
+      "type": "object",
+      "description": "Consumer buyer information",
+      "properties": {
+        "name1": {"type": "string", "description": "Consumer full name in kanji or kana"},
+        "name2": {"type": "string", "description": "Consumer name in alternate script"},
+        "email": {"type": "string", "format": "email"},
+        "phone": {"type": "string"}
+      }
+    },
+    "Address": {
+      "type": "object",
+      "description": "Physical address",
+      "properties": {
+        "line1": {"type": "string", "description": "Building or apartment info"},
+        "line2": {"type": "string", "description": "District or land details"},
+        "city": {"type": "string", "description": "Municipality name"},
+        "state": {"type": "string", "description": "Prefecture name"},
+        "zip": {"type": "string", "description": "Postal code (NNN-NNNN format)"}
+      }
+    },
+    "Order": {
+      "type": "object",
+      "description": "Order details",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/OrderItem"}
+        },
+        "tax": {"type": "number", "description": "Total tax in JPY"},
+        "shipping": {"type": "number", "description": "Shipping cost in JPY"},
+        "order_ref": {"type": "string", "description": "Merchant order reference"},
+        "updated_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "OrderItem": {
+      "type": "object",
+      "description": "A single line item in an order",
+      "required": ["quantity", "unit_price"],
+      "properties": {
+        "quantity": {"type": "integer", "minimum": 1},
+        "id": {"type": "string"},
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "unit_price": {"type": "number", "description": "Per-unit price in JPY; negative for discounts"}
+      }
+    },
+    "Capture": {
+      "type": "object",
+      "description": "A capture record for a payment",
+      "properties": {
+        "id": {"type": "string", "pattern": "^cap_"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "amount": {"type": "number"},
+        "tax": {"type": "number"},
+        "shipping": {"type": "number"},
+        "items": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/OrderItem"}
+        },
+        "metadata": {"$ref": "#/$defs/Metadata"}
+      }
+    },
+    "Refund": {
+      "type": "object",
+      "description": "A refund record for a payment",
+      "properties": {
+        "id": {"type": "string", "pattern": "^ref_"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "capture_id": {"type": "string", "pattern": "^cap_"},
+        "amount": {"type": "number"},
+        "reason": {"type": "string"},
+        "metadata": {"$ref": "#/$defs/Metadata"}
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Key-value map for arbitrary data; max 20 keys",
+      "additionalProperties": {"type": "string"},
+      "maxProperties": 20
+    }
+  }
+}

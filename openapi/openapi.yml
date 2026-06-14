@@ -1,0 +1,1246 @@
+openapi: 3.0.3
+info:
+  title: Paidy API
+  description: >
+    Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables
+    Japanese consumers to make purchases and pay later via monthly consolidated billing.
+    Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred
+    payments, manage authorizations, capture funds, issue refunds, and handle recurring payments
+    via stored tokens.
+  version: "2018-04-10"
+  contact:
+    name: Paidy Developer Support
+    url: https://paidy.com/merchant/
+  termsOfService: https://paidy.com/merchant/
+  license:
+    name: Proprietary
+    url: https://paidy.com/merchant/
+externalDocs:
+  description: Paidy API Reference
+  url: https://paidy.com/docs/api/en/
+servers:
+  - url: https://api.paidy.com
+    description: Production server
+security:
+  - BearerAuth: []
+tags:
+  - name: Payments
+    description: Manage payment authorizations, captures, refunds, updates, and closures.
+  - name: Tokens
+    description: Manage recurring payment tokens for subscription billing.
+paths:
+  /payments:
+    post:
+      tags:
+        - Payments
+      summary: Create a payment
+      description: >
+        Creates a new payment using a stored Paidy token. Used for recurring/subscription
+        billing where the consumer has previously authorized a token via Paidy Checkout.
+      operationId: createPayment
+      parameters:
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+            example:
+              token_id: tok_example123456
+              amount: 5000
+              currency: JPY
+              description: "Monthly subscription payment"
+              store_name: "My Store"
+              buyer_data:
+                user_id: "usr_12345"
+                ltv: 50000
+                order_count: 10
+                billing_address:
+                  line1: "Shibuya 1-1"
+                  city: "Tokyo"
+                  state: "Tokyo"
+                  zip: "150-0001"
+              order:
+                items:
+                  - quantity: 1
+                    id: "prod_001"
+                    title: "Subscription Plan A"
+                    unit_price: 5000
+                tax: 500
+                shipping: 0
+                order_ref: "order_20260613_001"
+              shipping_address:
+                line1: "Shibuya 1-1"
+                city: "Tokyo"
+                state: "Tokyo"
+                zip: "150-0001"
+      responses:
+        '200':
+          description: Payment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /payments/{id}:
+    get:
+      tags:
+        - Payments
+      summary: Retrieve a payment
+      description: Retrieves a payment by its unique ID, including all captures and refunds.
+      operationId: getPayment
+      parameters:
+        - $ref: '#/components/parameters/PaymentId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      responses:
+        '200':
+          description: Payment retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Payments
+      summary: Update a payment
+      description: >
+        Updates a payment's order reference, description, or metadata. Only these three
+        fields can be updated; all others are ignored.
+      operationId: updatePayment
+      parameters:
+        - $ref: '#/components/parameters/PaymentId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePaymentRequest'
+      responses:
+        '200':
+          description: Payment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /payments/{id}/captures:
+    post:
+      tags:
+        - Payments
+      summary: Capture a payment
+      description: >
+        Captures a previously authorized payment. The payment status changes to "closed"
+        after a successful capture. An empty JSON object must be provided in the request body.
+      operationId: capturePayment
+      parameters:
+        - $ref: '#/components/parameters/PaymentId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CapturePaymentRequest'
+            example:
+              metadata: {}
+      responses:
+        '200':
+          description: Payment captured successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /payments/{id}/refunds:
+    post:
+      tags:
+        - Payments
+      summary: Refund a payment
+      description: >
+        Refunds a captured payment, either fully or partially. Requires a capture ID.
+        Omit the amount field for a full refund.
+      operationId: refundPayment
+      parameters:
+        - $ref: '#/components/parameters/PaymentId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundPaymentRequest'
+            example:
+              capture_id: cap_example123456
+              amount: 2500
+              reason: "Customer returned item"
+              metadata: {}
+      responses:
+        '200':
+          description: Refund created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /payments/{id}/close:
+    post:
+      tags:
+        - Payments
+      summary: Close a payment
+      description: >
+        Closes an authorized payment without capturing it. After closing, the payment cannot
+        be captured. An empty JSON object must be provided in the request body.
+      operationId: closePayment
+      parameters:
+        - $ref: '#/components/parameters/PaymentId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Empty object required
+            example: {}
+      responses:
+        '200':
+          description: Payment closed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict - payment already closed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tokens/:
+    get:
+      tags:
+        - Tokens
+      summary: Retrieve all tokens
+      description: >
+        Retrieves all tokens associated with the merchant. Returns only tokens with
+        "active" or "suspended" status (not deleted tokens).
+      operationId: listTokens
+      parameters:
+        - $ref: '#/components/parameters/PaidyVersion'
+      responses:
+        '200':
+          description: List of tokens retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tokens/{id}:
+    get:
+      tags:
+        - Tokens
+      summary: Retrieve a token
+      description: Retrieves a specific token by its unique ID.
+      operationId: getToken
+      parameters:
+        - $ref: '#/components/parameters/TokenId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      responses:
+        '200':
+          description: Token retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Token not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tokens/{id}/suspend:
+    post:
+      tags:
+        - Tokens
+      summary: Suspend a token
+      description: >
+        Suspends an active token, preventing it from being used for new payments.
+        The token status changes to "suspended".
+      operationId: suspendToken
+      parameters:
+        - $ref: '#/components/parameters/TokenId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenActionRequest'
+            example:
+              wallet_id: "default"
+              reason:
+                code: "merchant.requested"
+                description: "Pausing subscription at merchant request"
+      responses:
+        '200':
+          description: Token suspended successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Token not found or deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tokens/{id}/resume:
+    post:
+      tags:
+        - Tokens
+      summary: Resume a token
+      description: >
+        Resumes a suspended token, allowing it to be used for payments again.
+        The token status changes to "active".
+      operationId: resumeToken
+      parameters:
+        - $ref: '#/components/parameters/TokenId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenActionRequest'
+            example:
+              wallet_id: "default"
+              reason:
+                code: "merchant.requested"
+                description: "Resuming subscription"
+      responses:
+        '200':
+          description: Token resumed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Token not found or deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tokens/{id}/delete:
+    post:
+      tags:
+        - Tokens
+      summary: Delete a token
+      description: >
+        Permanently deletes a token. Deleted tokens cannot be recovered. The token status
+        changes to "deleted" and the deleted_at timestamp is populated.
+      operationId: deleteToken
+      parameters:
+        - $ref: '#/components/parameters/TokenId'
+        - $ref: '#/components/parameters/PaidyVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenDeleteRequest'
+            example:
+              wallet_id: "default"
+              reason:
+                code: "consumer.requested"
+                description: "Consumer requested cancellation"
+      responses:
+        '200':
+          description: Token deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Token not found or already deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: >
+        Use your Paidy secret key (prefixed with `sk_`) as the bearer token.
+        Never share your secret key. Use test keys for sandbox testing.
+
+  parameters:
+    PaidyVersion:
+      name: Paidy-Version
+      in: header
+      required: false
+      description: API version date. Recommended value is 2018-04-10.
+      schema:
+        type: string
+        example: "2018-04-10"
+    PaymentId:
+      name: id
+      in: path
+      required: true
+      description: Unique payment ID (begins with `pay_`)
+      schema:
+        type: string
+        example: pay_example123456
+    TokenId:
+      name: id
+      in: path
+      required: true
+      description: Unique token ID (begins with `tok_`)
+      schema:
+        type: string
+        example: tok_example123456
+
+  schemas:
+    CreatePaymentRequest:
+      type: object
+      required:
+        - token_id
+        - amount
+        - currency
+        - buyer_data
+        - order
+        - shipping_address
+      properties:
+        token_id:
+          type: string
+          description: Paidy-generated token ID (begins with `tok_`)
+          example: tok_example123456
+        amount:
+          type: number
+          format: double
+          description: Total payment amount including tax and shipping in JPY
+          example: 5000
+        currency:
+          type: string
+          description: Currency code; must be JPY
+          enum:
+            - JPY
+          example: JPY
+        description:
+          type: string
+          description: Payment description
+          example: "Monthly subscription payment"
+        store_name:
+          type: string
+          description: Merchant store name for display
+          example: "My Store"
+        buyer_data:
+          $ref: '#/components/schemas/BuyerData'
+        order:
+          $ref: '#/components/schemas/Order'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+
+    UpdatePaymentRequest:
+      type: object
+      properties:
+        order_ref:
+          type: string
+          description: Merchant-defined order reference ID
+          example: "order_20260613_001"
+        description:
+          type: string
+          description: Payment description
+          example: "Updated description"
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    CapturePaymentRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    RefundPaymentRequest:
+      type: object
+      required:
+        - capture_id
+      properties:
+        capture_id:
+          type: string
+          description: Capture ID to refund (begins with `cap_`)
+          example: cap_example123456
+        amount:
+          type: number
+          format: double
+          description: Refund amount in JPY; omit for full refund
+          example: 2500
+        reason:
+          type: string
+          description: Refund reason description
+          example: "Customer returned item"
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    TokenActionRequest:
+      type: object
+      required:
+        - reason
+      properties:
+        wallet_id:
+          type: string
+          description: Merchant wallet identifier; defaults to "default"
+          example: "default"
+        reason:
+          $ref: '#/components/schemas/TokenReason'
+
+    TokenDeleteRequest:
+      type: object
+      required:
+        - reason
+      properties:
+        wallet_id:
+          type: string
+          description: Merchant wallet identifier; defaults to "default"
+          example: "default"
+        reason:
+          $ref: '#/components/schemas/TokenDeleteReason'
+
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique payment ID (begins with `pay_`)
+          example: pay_example123456
+        status:
+          type: string
+          description: Current payment status
+          enum:
+            - authorized
+            - closed
+            - rejected
+          example: authorized
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: "2026-06-13T00:00:00Z"
+        expires_at:
+          type: string
+          format: date-time
+          description: ISO 8601 expiration deadline for authorization
+          example: "2026-07-13T00:00:00Z"
+        amount:
+          type: number
+          format: double
+          description: Total payment amount in JPY
+          example: 5000
+        currency:
+          type: string
+          description: Currency code
+          example: JPY
+        description:
+          type: string
+          description: Payment description
+          example: "Monthly subscription payment"
+        store_name:
+          type: string
+          description: Merchant store name
+          example: "My Store"
+        test:
+          type: boolean
+          description: Indicates if this is a test payment
+          example: false
+        tier:
+          type: string
+          description: Payment tier
+          example: classic
+        buyer:
+          $ref: '#/components/schemas/Buyer'
+        order:
+          $ref: '#/components/schemas/Order'
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+        captures:
+          type: array
+          description: List of captures for this payment
+          items:
+            $ref: '#/components/schemas/Capture'
+        refunds:
+          type: array
+          description: List of refunds for this payment
+          items:
+            $ref: '#/components/schemas/Refund'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    Token:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique token ID (begins with `tok_`)
+          example: tok_example123456
+        merchant_id:
+          type: string
+          description: Paidy-assigned merchant ID (begins with `mer_`)
+          example: mer_example123456
+        wallet_id:
+          type: string
+          description: Grouping identifier for tokens; defaults to "default"
+          example: "default"
+        status:
+          type: string
+          description: Current token status
+          enum:
+            - active
+            - suspended
+            - deleted
+          example: active
+        origin:
+          $ref: '#/components/schemas/ConsumerOrigin'
+        description:
+          type: string
+          description: Merchant-provided token description
+          example: "Monthly plan token"
+        kind:
+          type: string
+          description: Token type; always "recurring"
+          example: recurring
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        consumer_id:
+          type: string
+          description: Paidy-generated consumer ID (begins with `con_`)
+          example: con_example123456
+        suspensions:
+          type: array
+          description: Suspension history records
+          items:
+            $ref: '#/components/schemas/Suspension'
+        test:
+          type: boolean
+          description: Indicates if this is a test token
+          example: false
+        version_nr:
+          type: number
+          description: Increments with each update
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: "2026-06-13T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: ISO 8601 last update timestamp
+          example: "2026-06-13T00:00:00Z"
+        activated_at:
+          type: string
+          format: date-time
+          description: ISO 8601 activation timestamp
+          example: "2026-06-13T00:00:00Z"
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 deletion timestamp; null if not deleted
+          example: null
+
+    BuyerData:
+      type: object
+      required:
+        - user_id
+        - ltv
+        - order_count
+        - billing_address
+      properties:
+        user_id:
+          type: string
+          description: Consumer's store user ID
+          example: "usr_12345"
+        age:
+          type: integer
+          description: Days since account opening
+          example: 365
+        age_platform:
+          type: integer
+          description: Days since parent organization account creation
+          example: 730
+        account_registration_date:
+          type: string
+          format: date
+          description: Account registration date (YYYY-MM-DD)
+          example: "2025-06-13"
+        days_since_first_transaction:
+          type: integer
+          description: Days since first transaction, excluding canceled/refunded orders
+          example: 90
+        ltv:
+          type: number
+          format: double
+          description: Lifetime value in JPY
+          example: 50000
+        order_count:
+          type: integer
+          description: Total number of orders made
+          example: 10
+        last_order_amount:
+          type: number
+          format: double
+          description: JPY amount of last order
+          example: 3000
+        last_order_at:
+          type: integer
+          description: Days since last purchase
+          example: 30
+        last_order_date:
+          type: string
+          format: date
+          description: Date of last order (YYYY-MM-DD)
+          example: "2026-05-13"
+        order_amount_last3months:
+          type: integer
+          description: Total spending in last 90 days
+          example: 15000
+        order_count_last3months:
+          type: integer
+          description: Number of orders in last 90 days
+          example: 3
+        additional_shipping_addresses:
+          type: array
+          description: Additional delivery locations
+          items:
+            $ref: '#/components/schemas/Address'
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        delivery_locn_type:
+          type: string
+          description: Delivery location type
+          enum:
+            - home
+            - office
+            - shop
+            - combini
+            - locker
+            - post_office
+            - delivery_center
+            - forwarding_shipment_service
+            - gift
+            - not_primary_home
+          example: home
+        gender:
+          type: string
+          description: Consumer gender
+          example: "Male"
+        subscription_counter:
+          type: integer
+          description: Total number of subscription purchases
+          example: 5
+        previous_payment_methods:
+          type: object
+          description: Boolean flags indicating previously used payment methods
+          additionalProperties:
+            type: boolean
+        number_of_points:
+          type: integer
+          description: Accumulated loyalty points
+          example: 1000
+        order_item_categories:
+          type: array
+          description: Categories of ordered items (comma-separated)
+          items:
+            type: string
+
+    Order:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          description: List of order items
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        tax:
+          type: number
+          format: double
+          description: Total tax amount in JPY
+          example: 500
+        shipping:
+          type: number
+          format: double
+          description: Total shipping cost in JPY
+          example: 0
+        order_ref:
+          type: string
+          description: Merchant-defined order reference ID
+          example: "order_20260613_001"
+        updated_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of last update
+          readOnly: true
+
+    OrderItem:
+      type: object
+      required:
+        - quantity
+        - unit_price
+      properties:
+        quantity:
+          type: integer
+          description: Item quantity
+          example: 1
+        id:
+          type: string
+          description: Merchant product ID
+          example: "prod_001"
+        title:
+          type: string
+          description: Item name for display
+          example: "Subscription Plan A"
+        description:
+          type: string
+          description: Item details
+          example: "Monthly subscription"
+        unit_price:
+          type: number
+          format: double
+          description: Per-unit price in JPY; use negative value for discounts
+          example: 5000
+
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+          description: Building or apartment information
+          example: "Shibuya 1-1"
+        line2:
+          type: string
+          description: District or land details
+          example: "Apartment 301"
+        city:
+          type: string
+          description: Municipality name
+          example: "Tokyo"
+        state:
+          type: string
+          description: Prefecture name
+          example: "Tokyo"
+        zip:
+          type: string
+          description: Postal code in format NNN-NNNN; required with at least one other field
+          example: "150-0001"
+
+    Buyer:
+      type: object
+      properties:
+        name1:
+          type: string
+          description: Consumer's full name (kanji/kana)
+          example: "山田 太郎"
+        name2:
+          type: string
+          description: Consumer's name in alternate script
+          example: "Taro Yamada"
+        email:
+          type: string
+          format: email
+          description: Consumer's email address
+          example: "taro@example.com"
+        phone:
+          type: string
+          description: Consumer's phone number
+          example: "090-1234-5678"
+
+    ConsumerOrigin:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Consumer name
+          example: "Taro Yamada"
+        email:
+          type: string
+          format: email
+          description: Consumer email address
+          example: "taro@example.com"
+        phone:
+          type: string
+          description: Consumer phone number
+          example: "090-1234-5678"
+        address:
+          $ref: '#/components/schemas/Address'
+
+    Capture:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique capture ID (begins with `cap_`)
+          example: cap_example123456
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: "2026-06-13T00:00:00Z"
+        amount:
+          type: number
+          format: double
+          description: Captured amount in JPY
+          example: 5000
+        tax:
+          type: number
+          format: double
+          description: Tax amount captured
+          example: 500
+        shipping:
+          type: number
+          format: double
+          description: Shipping amount captured
+          example: 0
+        items:
+          type: array
+          description: Order items captured
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique refund ID (begins with `ref_`)
+          example: ref_example123456
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: "2026-06-13T00:00:00Z"
+        capture_id:
+          type: string
+          description: Associated capture ID
+          example: cap_example123456
+        amount:
+          type: number
+          format: double
+          description: Refunded amount in JPY
+          example: 2500
+        reason:
+          type: string
+          description: Refund reason
+          example: "Customer returned item"
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    TokenReason:
+      type: object
+      required:
+        - code
+        - description
+      properties:
+        code:
+          type: string
+          description: Reason code for token suspension or resumption
+          enum:
+            - consumer.requested
+            - merchant.requested
+            - fraud.suspected
+            - general
+          example: merchant.requested
+        description:
+          type: string
+          description: Explanation for the action
+          example: "Pausing subscription at merchant request"
+
+    TokenDeleteReason:
+      type: object
+      required:
+        - code
+        - description
+      properties:
+        code:
+          type: string
+          description: Reason code for token deletion
+          enum:
+            - consumer.requested
+            - subscription.expired
+            - merchant.requested
+            - fraud.detected
+            - general
+          example: consumer.requested
+        description:
+          type: string
+          description: Explanation for the deletion
+          example: "Consumer requested cancellation"
+
+    Suspension:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when suspension occurred
+          example: "2026-06-13T00:00:00Z"
+        authority:
+          type: string
+          description: Entity that performed the suspension
+          example: merchant
+
+    Metadata:
+      type: object
+      description: Key-value map for arbitrary data; maximum 20 keys
+      additionalProperties:
+        type: string
+      maxProperties: 20
+      example:
+        custom_field: "value"
+
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 400
+        code:
+          type: string
+          description: Paidy error code
+          example: request_content.malformed
+        message:
+          type: string
+          description: Human-readable error description
+          example: "Missing or incorrectly formatted required fields"

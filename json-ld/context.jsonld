@@ -1,0 +1,93 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "paidy": "https://paidy.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Payment": "paidy:Payment",
+    "Token": "paidy:Token",
+    "Capture": "paidy:Capture",
+    "Refund": "paidy:Refund",
+    "Order": "paidy:Order",
+    "OrderItem": "paidy:OrderItem",
+    "Address": "schema:PostalAddress",
+    "Buyer": "schema:Person",
+    "BuyerData": "paidy:BuyerData",
+
+    "id": "@id",
+    "status": "paidy:status",
+    "amount": {
+      "@id": "paidy:amount",
+      "@type": "xsd:double"
+    },
+    "currency": "paidy:currency",
+    "description": "schema:description",
+    "store_name": "paidy:storeName",
+    "test": "paidy:isTest",
+    "tier": "paidy:tier",
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "expires_at": {
+      "@id": "paidy:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "deleted_at": {
+      "@id": "paidy:deletedAt",
+      "@type": "xsd:dateTime"
+    },
+    "activated_at": {
+      "@id": "paidy:activatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "merchant_id": "paidy:merchantId",
+    "wallet_id": "paidy:walletId",
+    "consumer_id": "paidy:consumerId",
+    "version_nr": "paidy:versionNumber",
+    "kind": "paidy:kind",
+    "token_id": "paidy:tokenId",
+    "capture_id": "paidy:captureId",
+    "order_ref": "paidy:orderRef",
+    "unit_price": "paidy:unitPrice",
+    "quantity": "schema:orderQuantity",
+    "tax": "paidy:taxAmount",
+    "shipping": "paidy:shippingAmount",
+    "ltv": "paidy:lifetimeValue",
+    "order_count": "paidy:orderCount",
+    "user_id": "paidy:userId",
+
+    "buyer": "paidy:buyer",
+    "order": "schema:order",
+    "items": "schema:itemListElement",
+    "captures": "paidy:captures",
+    "refunds": "paidy:refunds",
+    "metadata": "paidy:metadata",
+    "shipping_address": "schema:deliveryAddress",
+    "billing_address": "schema:billingAddress",
+    "origin": "paidy:origin",
+    "suspensions": "paidy:suspensions",
+    "buyer_data": "paidy:buyerData",
+    "reason": "paidy:reason",
+
+    "name1": "schema:name",
+    "name2": "paidy:alternateName",
+    "email": "schema:email",
+    "phone": "schema:telephone",
+    "name": "schema:name",
+
+    "line1": "schema:streetAddress",
+    "line2": "paidy:addressLine2",
+    "city": "schema:addressLocality",
+    "state": "schema:addressRegion",
+    "zip": "schema:postalCode",
+
+    "code": "paidy:reasonCode",
+    "authority": "paidy:authority"
+  }
+}

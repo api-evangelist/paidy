@@ -1,0 +1,40 @@
+{
+  "token_id": "tok_example123456",
+  "amount": 5000,
+  "currency": "JPY",
+  "description": "Monthly subscription payment",
+  "store_name": "My Store",
+  "buyer_data": {
+    "user_id": "usr_12345",
+    "ltv": 50000,
+    "order_count": 10,
+    "last_order_amount": 3000,
+    "last_order_at": 30,
+    "billing_address": {
+      "line1": "Shibuya 1-1",
+      "city": "Tokyo",
+      "state": "Tokyo",
+      "zip": "150-0001"
+    }
+  },
+  "order": {
+    "items": [
+      {
+        "quantity": 1,
+        "id": "prod_001",
+        "title": "Subscription Plan A",
+        "description": "Monthly subscription",
+        "unit_price": 5000
+      }
+    ],
+    "tax": 500,
+    "shipping": 0,
+    "order_ref": "order_20260613_001"
+  },
+  "shipping_address": {
+    "line1": "Shibuya 1-1",
+    "city": "Tokyo",
+    "state": "Tokyo",
+    "zip": "150-0001"
+  }
+}
