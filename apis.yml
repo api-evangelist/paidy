@@ -1,6 +1,6 @@
 name: Paidy
 description: Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables Japanese consumers to make purchases and pay later via monthly consolidated billing. Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred payments, manage authorizations, capture funds, issue refunds, and handle recurring payments via stored tokens.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/paidy/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -17,7 +17,7 @@ tags:
 apis:
   - name: Paidy Payments API
     description: REST API for managing Paidy payment authorizations, captures, refunds, updates, and closures. Merchants use this API to manage the lifecycle of payments created through Paidy Checkout or via stored payment tokens for recurring billing.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://paidy.com/docs/en/payments.html
     baseURL: https://api.paidy.com
     tags:
@@ -52,7 +52,7 @@ apis:
         email: ""
   - name: Paidy Tokens API
     description: REST API for managing Paidy payment tokens used in recurring and subscription billing. Supports suspending, resuming, deleting, and retrieving tokens created during Paidy Checkout for recurring payment authorization.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://paidy.com/docs/en/tokens.html
     baseURL: https://api.paidy.com
     tags:
@@ -80,7 +80,7 @@ apis:
         email: ""
   - name: Paidy Checkout
     description: JavaScript-based checkout integration that enables consumers to authenticate with Paidy and authorize payments or create recurring payment tokens directly from the merchant checkout page. Handles the consumer-facing authentication flow including SMS verification.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://paidy.com/docs/en/paidycheckout.html
     baseURL: https://apps.paidy.com
     tags:
