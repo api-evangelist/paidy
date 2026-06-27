@@ -36,7 +36,7 @@ apis:
         url: https://paidy.com/docs/api/en/#section/Authentication
       - type: Webhooks
         url: https://paidy.com/docs/en/webhook.html
-      - type: Changelog
+      - type: ChangeLog
         url: https://paidy.com/docs/en/updates.html
       - type: Testing
         url: https://paidy.com/docs/en/testing.html
@@ -70,7 +70,7 @@ apis:
         url: https://paidy.com/docs/api/en/#section/Authentication
       - type: Webhooks
         url: https://paidy.com/docs/en/webhook.html
-      - type: Changelog
+      - type: ChangeLog
         url: https://paidy.com/docs/en/updates.html
       - type: Testing
         url: https://paidy.com/docs/en/testing.html
@@ -103,13 +103,13 @@ apis:
 common:
   - type: Documentation
     url: https://paidy.com/docs/en/
-  - type: API Reference
+  - type: APIReference
     url: https://paidy.com/docs/api/en/
   - type: Merchant Dashboard
     url: https://merchant.paidy.com/
   - type: Webhooks
     url: https://paidy.com/docs/en/webhook.html
-  - type: Changelog
+  - type: ChangeLog
     url: https://paidy.com/docs/en/updates.html
   - type: Testing
     url: https://paidy.com/docs/en/testing.html
