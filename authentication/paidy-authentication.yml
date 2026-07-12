@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: Use your Paidy secret key (prefixed with `sk_`) as the bearer token. Never share
+    your secret key. Use test keys for sandbox testing.
+  sources:
+  - openapi/openapi.yml

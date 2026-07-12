@@ -101,6 +101,10 @@ apis:
         url: https://paidy.com/merchant/
         email: ""
 common:
+  - type: DomainSecurity
+    url: security/paidy-domain-security.yml
+  - type: Authentication
+    url: authentication/paidy-authentication.yml
   - type: Documentation
     url: https://paidy.com/docs/en/
   - type: APIReference
