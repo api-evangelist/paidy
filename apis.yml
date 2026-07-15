@@ -101,6 +101,8 @@ apis:
         url: https://paidy.com/merchant/
         email: ""
 common:
+  - type: AgenticAccess
+    url: agentic-access/paidy-agentic-access.yml
   - type: DomainSecurity
     url: security/paidy-domain-security.yml
   - type: Authentication
