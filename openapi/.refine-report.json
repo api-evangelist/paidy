@@ -1,0 +1,16 @@
+{
+  "provider": "paidy",
+  "sources": [
+    "paidy-payments-api-openapi.yml",
+    "paidy-tokens-api-openapi.yml"
+  ],
+  "outputs": [
+    "paidy-payments-api-openapi.yml",
+    "paidy-tokens-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
