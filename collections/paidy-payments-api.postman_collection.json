@@ -1,0 +1,2320 @@
+{
+  "item": [
+    {
+      "id": "6f0af829-49fe-4a8e-9a8d-6d6c31b823ac",
+      "name": "Payments",
+      "description": {
+        "content": "Manage payment authorizations, captures, refunds, updates, and closures.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8fd3af64-8deb-4952-a965-95cb19c6dd81",
+          "name": "Create a payment",
+          "request": {
+            "name": "Create a payment",
+            "description": {
+              "content": "Creates a new payment using a stored Paidy token. Used for recurring/subscription billing where the consumer has previously authorized a token via Paidy Checkout.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token_id\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"buyer_data\": {\n    \"user_id\": \"<string>\",\n    \"ltv\": \"<double>\",\n    \"order_count\": \"<integer>\",\n    \"billing_address\": {\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"age\": \"<integer>\",\n    \"age_platform\": \"<integer>\",\n    \"account_registration_date\": \"<date>\",\n    \"days_since_first_transaction\": \"<integer>\",\n    \"last_order_amount\": \"<double>\",\n    \"last_order_at\": \"<integer>\",\n    \"last_order_date\": \"<date>\",\n    \"order_amount_last3months\": \"<integer>\",\n    \"order_count_last3months\": \"<integer>\",\n    \"additional_shipping_addresses\": [\n      {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      }\n    ],\n    \"delivery_locn_type\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"subscription_counter\": \"<integer>\",\n    \"previous_payment_methods\": {\n      \"key_0\": \"<boolean>\"\n    },\n    \"number_of_points\": \"<integer>\",\n    \"order_item_categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": \"<integer>\",\n        \"unit_price\": \"<double>\",\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"quantity\": \"<integer>\",\n        \"unit_price\": \"<double>\",\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"tax\": \"<double>\",\n    \"shipping\": \"<double>\",\n    \"order_ref\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"store_name\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\",\n    \"key_4\": \"<string>\",\n    \"key_5\": \"<string>\",\n    \"key_6\": \"<string>\",\n    \"key_7\": \"<string>\",\n    \"key_8\": \"<string>\",\n    \"key_9\": \"<string>\",\n    \"key_10\": \"<string>\",\n    \"key_11\": \"<string>\",\n    \"key_12\": \"<string>\",\n    \"key_13\": \"<string>\",\n    \"key_14\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e950e5c-9122-480d-846f-c72982b30f68",
+              "name": "Payment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"tok_example123456\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"buyer_data\": {\n    \"user_id\": \"usr_12345\",\n    \"ltv\": 50000,\n    \"order_count\": 10,\n    \"billing_address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"unit_price\": 5000\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pay_example123456\",\n  \"status\": \"authorized\",\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"expires_at\": \"2026-07-13T00:00:00Z\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"test\": false,\n  \"tier\": \"classic\",\n  \"buyer\": {\n    \"name1\": \"山田 太郎\",\n    \"name2\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\"\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      },\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\",\n    \"updated_at\": \"1946-10-11T21:58:26.449Z\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"line2\": \"Apartment 301\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  },\n  \"captures\": [\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"refunds\": [\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dad27ac7-1da3-4bc1-8d56-1bb794fe2aa1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"tok_example123456\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"buyer_data\": {\n    \"user_id\": \"usr_12345\",\n    \"ltv\": 50000,\n    \"order_count\": 10,\n    \"billing_address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"unit_price\": 5000\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d03c25e-8a50-41d7-9074-cf8b8244a704",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"tok_example123456\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"buyer_data\": {\n    \"user_id\": \"usr_12345\",\n    \"ltv\": 50000,\n    \"order_count\": 10,\n    \"billing_address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"unit_price\": 5000\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc71de34-fab8-4946-92b5-77f43b1784d8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token_id\": \"tok_example123456\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"buyer_data\": {\n    \"user_id\": \"usr_12345\",\n    \"ltv\": 50000,\n    \"order_count\": 10,\n    \"billing_address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"unit_price\": 5000\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51cfb203-acbf-46a5-9775-e3ccb64a1dd9",
+          "name": "Retrieve a payment",
+          "request": {
+            "name": "Retrieve a payment",
+            "description": {
+              "content": "Retrieves a payment by its unique ID, including all captures and refunds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique payment ID (begins with `pay_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1077bf3-2338-4f62-bc46-68157dbabc9d",
+              "name": "Payment retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pay_example123456\",\n  \"status\": \"authorized\",\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"expires_at\": \"2026-07-13T00:00:00Z\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"test\": false,\n  \"tier\": \"classic\",\n  \"buyer\": {\n    \"name1\": \"山田 太郎\",\n    \"name2\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\"\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      },\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\",\n    \"updated_at\": \"2025-08-31T08:29:59.124Z\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"line2\": \"Apartment 301\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  },\n  \"captures\": [\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"refunds\": [\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe70f0e5-1b1a-4970-8833-b2430024a588",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec931fca-9e11-4f24-8f89-c02dbc2a10dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dfadba7-2136-4739-9a4f-5b7b5eb209b9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f0ea312-865c-4f94-bc98-0df84facac93",
+              "name": "Payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96f7db16-2f10-4d49-b965-9a1b2e58eb9f",
+          "name": "Update a payment",
+          "request": {
+            "name": "Update a payment",
+            "description": {
+              "content": "Updates a payment's order reference, description, or metadata. Only these three fields can be updated; all others are ignored.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique payment ID (begins with `pay_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_ref\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\",\n    \"key_4\": \"<string>\",\n    \"key_5\": \"<string>\",\n    \"key_6\": \"<string>\",\n    \"key_7\": \"<string>\",\n    \"key_8\": \"<string>\",\n    \"key_9\": \"<string>\",\n    \"key_10\": \"<string>\",\n    \"key_11\": \"<string>\",\n    \"key_12\": \"<string>\",\n    \"key_13\": \"<string>\",\n    \"key_14\": \"<string>\",\n    \"key_15\": \"<string>\",\n    \"key_16\": \"<string>\",\n    \"key_17\": \"<string>\",\n    \"key_18\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ee33e66-6f53-467a-81e1-d35a571885db",
+              "name": "Payment updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ref\": \"order_20260613_001\",\n  \"description\": \"Updated description\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pay_example123456\",\n  \"status\": \"authorized\",\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"expires_at\": \"2026-07-13T00:00:00Z\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"test\": false,\n  \"tier\": \"classic\",\n  \"buyer\": {\n    \"name1\": \"山田 太郎\",\n    \"name2\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\"\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      },\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\",\n    \"updated_at\": \"2025-08-31T08:29:59.124Z\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"line2\": \"Apartment 301\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  },\n  \"captures\": [\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"refunds\": [\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34e57d03-1dec-4fe9-b8f7-17500504bf7b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ref\": \"order_20260613_001\",\n  \"description\": \"Updated description\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9211708-13b2-4a9f-944a-db180f9b59c3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ref\": \"order_20260613_001\",\n  \"description\": \"Updated description\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e763045-b5c5-4abe-962c-0c46cf9de8b2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ref\": \"order_20260613_001\",\n  \"description\": \"Updated description\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57d4a63e-9405-498d-a1f7-ceee00ce1cd0",
+              "name": "Payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_ref\": \"order_20260613_001\",\n  \"description\": \"Updated description\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38d73f1f-5744-43dd-8a36-a898c1c7478d",
+          "name": "Capture a payment",
+          "request": {
+            "name": "Capture a payment",
+            "description": {
+              "content": "Captures a previously authorized payment. The payment status changes to \"closed\" after a successful capture. An empty JSON object must be provided in the request body.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "captures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique payment ID (begins with `pay_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\",\n    \"key_4\": \"<string>\",\n    \"key_5\": \"<string>\",\n    \"key_6\": \"<string>\",\n    \"key_7\": \"<string>\",\n    \"key_8\": \"<string>\",\n    \"key_9\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dcc43cf4-12c6-4147-9a36-f02dca121e64",
+              "name": "Payment captured successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pay_example123456\",\n  \"status\": \"authorized\",\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"expires_at\": \"2026-07-13T00:00:00Z\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"test\": false,\n  \"tier\": \"classic\",\n  \"buyer\": {\n    \"name1\": \"山田 太郎\",\n    \"name2\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\"\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      },\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\",\n    \"updated_at\": \"2025-08-31T08:29:59.124Z\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"line2\": \"Apartment 301\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  },\n  \"captures\": [\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"refunds\": [\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41c898d5-6163-449a-b7d6-8393f51c5817",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1eae1fb-0e66-41d6-b670-8b015414787e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbd07c2a-debc-471d-8182-5dca82c88287",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eda8e02e-2e54-4e4b-8d7f-55436133bfe3",
+              "name": "Payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "captures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "810fcfa4-8dd3-4963-93d8-c7969ff81088",
+          "name": "Refund a payment",
+          "request": {
+            "name": "Refund a payment",
+            "description": {
+              "content": "Refunds a captured payment, either fully or partially. Requires a capture ID. Omit the amount field for a full refund.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique payment ID (begins with `pay_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"capture_id\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"reason\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\",\n    \"key_4\": \"<string>\",\n    \"key_5\": \"<string>\",\n    \"key_6\": \"<string>\",\n    \"key_7\": \"<string>\",\n    \"key_8\": \"<string>\",\n    \"key_9\": \"<string>\",\n    \"key_10\": \"<string>\",\n    \"key_11\": \"<string>\",\n    \"key_12\": \"<string>\",\n    \"key_13\": \"<string>\",\n    \"key_14\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4845b60f-9ed5-431f-a4eb-8f0c7fa9b71f",
+              "name": "Refund created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"capture_id\": \"cap_example123456\",\n  \"amount\": 2500,\n  \"reason\": \"Customer returned item\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pay_example123456\",\n  \"status\": \"authorized\",\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"expires_at\": \"2026-07-13T00:00:00Z\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"test\": false,\n  \"tier\": \"classic\",\n  \"buyer\": {\n    \"name1\": \"山田 太郎\",\n    \"name2\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\"\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      },\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\",\n    \"updated_at\": \"2025-08-31T08:29:59.124Z\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"line2\": \"Apartment 301\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  },\n  \"captures\": [\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"refunds\": [\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d1d33c4-f4c6-425e-9fab-2b6dd9b1bf1a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"capture_id\": \"cap_example123456\",\n  \"amount\": 2500,\n  \"reason\": \"Customer returned item\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0b8ce29-6772-4547-8bcc-88e0b330f155",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"capture_id\": \"cap_example123456\",\n  \"amount\": 2500,\n  \"reason\": \"Customer returned item\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94c733f9-84a7-4691-a229-4f150bffb4cb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"capture_id\": \"cap_example123456\",\n  \"amount\": 2500,\n  \"reason\": \"Customer returned item\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0e49b69-9a64-4631-bd34-61c8a139ae91",
+              "name": "Payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"capture_id\": \"cap_example123456\",\n  \"amount\": 2500,\n  \"reason\": \"Customer returned item\",\n  \"metadata\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86df35af-84c2-4814-b8ed-2282fb9dae8b",
+          "name": "Close a payment",
+          "request": {
+            "name": "Close a payment",
+            "description": {
+              "content": "Closes an authorized payment without capturing it. After closing, the payment cannot be captured. An empty JSON object must be provided in the request body.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique payment ID (begins with `pay_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "235423b6-fc9b-4132-af5a-595e29b8f4a6",
+              "name": "Payment closed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pay_example123456\",\n  \"status\": \"authorized\",\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"expires_at\": \"2026-07-13T00:00:00Z\",\n  \"amount\": 5000,\n  \"currency\": \"JPY\",\n  \"description\": \"Monthly subscription payment\",\n  \"store_name\": \"My Store\",\n  \"test\": false,\n  \"tier\": \"classic\",\n  \"buyer\": {\n    \"name1\": \"山田 太郎\",\n    \"name2\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\"\n  },\n  \"order\": {\n    \"items\": [\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      },\n      {\n        \"quantity\": 1,\n        \"unit_price\": 5000,\n        \"id\": \"prod_001\",\n        \"title\": \"Subscription Plan A\",\n        \"description\": \"Monthly subscription\"\n      }\n    ],\n    \"tax\": 500,\n    \"shipping\": 0,\n    \"order_ref\": \"order_20260613_001\",\n    \"updated_at\": \"2025-08-31T08:29:59.124Z\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"Shibuya 1-1\",\n    \"line2\": \"Apartment 301\",\n    \"city\": \"Tokyo\",\n    \"state\": \"Tokyo\",\n    \"zip\": \"150-0001\"\n  },\n  \"captures\": [\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"cap_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"amount\": 5000,\n      \"tax\": 500,\n      \"shipping\": 0,\n      \"items\": [\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        },\n        {\n          \"quantity\": 1,\n          \"unit_price\": 5000,\n          \"id\": \"prod_001\",\n          \"title\": \"Subscription Plan A\",\n          \"description\": \"Monthly subscription\"\n        }\n      ],\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"refunds\": [\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    },\n    {\n      \"id\": \"ref_example123456\",\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"capture_id\": \"cap_example123456\",\n      \"amount\": 2500,\n      \"reason\": \"Customer returned item\",\n      \"metadata\": {\n        \"custom_field\": \"value\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "593fd168-fe63-45ce-ba6f-bd250b088b49",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fbfc886-ac78-4b18-a7e8-c95afdd0cc38",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a5fad3-4fd0-4385-82a0-69f79d4103ce",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "409c67dd-df30-48de-af5f-7f1e9c4c41f0",
+              "name": "Payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d97228f-0205-472d-8ff8-4cf64f0a20e5",
+              "name": "Conflict - payment already closed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique payment ID (begins with `pay_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.paidy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "654763bb-8ddf-420c-869f-05c3e42844c6",
+    "name": "Paidy Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables Japanese consumers to make purchases and pay later via monthly consolidated billing. Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred payments, manage authorizations, capture funds, issue refunds, and handle recurring payments via stored tokens.\n\n\nContact Support:\n Name: Paidy Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

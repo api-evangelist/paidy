@@ -1,0 +1,1712 @@
+{
+  "item": [
+    {
+      "id": "ecddc12f-db31-4b92-bd4d-b291793f0987",
+      "name": "Tokens",
+      "description": {
+        "content": "Manage recurring payment tokens for subscription billing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2561f6ed-4733-4a00-9471-52ab8d6afb2d",
+          "name": "Retrieve all tokens",
+          "request": {
+            "name": "Retrieve all tokens",
+            "description": {
+              "content": "Retrieves all tokens associated with the merchant. Returns only tokens with \"active\" or \"suspended\" status (not deleted tokens).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef9d9ae3-280b-4001-80b9-dd519be4c225",
+              "name": "List of tokens retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"tok_example123456\",\n    \"merchant_id\": \"mer_example123456\",\n    \"wallet_id\": \"default\",\n    \"status\": \"active\",\n    \"origin\": {\n      \"name\": \"Taro Yamada\",\n      \"email\": \"taro@example.com\",\n      \"phone\": \"090-1234-5678\",\n      \"address\": {\n        \"line1\": \"Shibuya 1-1\",\n        \"line2\": \"Apartment 301\",\n        \"city\": \"Tokyo\",\n        \"state\": \"Tokyo\",\n        \"zip\": \"150-0001\"\n      }\n    },\n    \"description\": \"Monthly plan token\",\n    \"kind\": \"recurring\",\n    \"metadata\": {\n      \"custom_field\": \"value\"\n    },\n    \"consumer_id\": \"con_example123456\",\n    \"suspensions\": [\n      {\n        \"created_at\": \"2026-06-13T00:00:00Z\",\n        \"authority\": \"merchant\"\n      },\n      {\n        \"created_at\": \"2026-06-13T00:00:00Z\",\n        \"authority\": \"merchant\"\n      }\n    ],\n    \"test\": false,\n    \"version_nr\": 1,\n    \"created_at\": \"2026-06-13T00:00:00Z\",\n    \"updated_at\": \"2026-06-13T00:00:00Z\",\n    \"activated_at\": \"2026-06-13T00:00:00Z\",\n    \"deleted_at\": null\n  },\n  {\n    \"id\": \"tok_example123456\",\n    \"merchant_id\": \"mer_example123456\",\n    \"wallet_id\": \"default\",\n    \"status\": \"active\",\n    \"origin\": {\n      \"name\": \"Taro Yamada\",\n      \"email\": \"taro@example.com\",\n      \"phone\": \"090-1234-5678\",\n      \"address\": {\n        \"line1\": \"Shibuya 1-1\",\n        \"line2\": \"Apartment 301\",\n        \"city\": \"Tokyo\",\n        \"state\": \"Tokyo\",\n        \"zip\": \"150-0001\"\n      }\n    },\n    \"description\": \"Monthly plan token\",\n    \"kind\": \"recurring\",\n    \"metadata\": {\n      \"custom_field\": \"value\"\n    },\n    \"consumer_id\": \"con_example123456\",\n    \"suspensions\": [\n      {\n        \"created_at\": \"2026-06-13T00:00:00Z\",\n        \"authority\": \"merchant\"\n      },\n      {\n        \"created_at\": \"2026-06-13T00:00:00Z\",\n        \"authority\": \"merchant\"\n      }\n    ],\n    \"test\": false,\n    \"version_nr\": 1,\n    \"created_at\": \"2026-06-13T00:00:00Z\",\n    \"updated_at\": \"2026-06-13T00:00:00Z\",\n    \"activated_at\": \"2026-06-13T00:00:00Z\",\n    \"deleted_at\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59a19904-f58d-4dfa-9460-998f85637567",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "321b62f0-f524-4993-98b0-4b6e7b72af6f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "463f1d02-dd5d-410a-bd17-7b3d1bf500f2",
+          "name": "Retrieve a token",
+          "request": {
+            "name": "Retrieve a token",
+            "description": {
+              "content": "Retrieves a specific token by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique token ID (begins with `tok_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3db7f82c-22b3-4cf1-a2d4-e28eb3d1b88e",
+              "name": "Token retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"tok_example123456\",\n  \"merchant_id\": \"mer_example123456\",\n  \"wallet_id\": \"default\",\n  \"status\": \"active\",\n  \"origin\": {\n    \"name\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\",\n    \"address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"line2\": \"Apartment 301\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"description\": \"Monthly plan token\",\n  \"kind\": \"recurring\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  },\n  \"consumer_id\": \"con_example123456\",\n  \"suspensions\": [\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    },\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    }\n  ],\n  \"test\": false,\n  \"version_nr\": 1,\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"updated_at\": \"2026-06-13T00:00:00Z\",\n  \"activated_at\": \"2026-06-13T00:00:00Z\",\n  \"deleted_at\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fa537af-7bcf-48bb-9092-6b04d97c58f1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25623c66-a2fb-4fc1-a9cf-ca62fb15c7b3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10049486-6cc8-4a03-a759-58929c64f2b3",
+              "name": "Token not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "176e7360-0204-40d6-b4b3-4f31b25f2e5b",
+          "name": "Suspend a token",
+          "request": {
+            "name": "Suspend a token",
+            "description": {
+              "content": "Suspends an active token, preventing it from being used for new payments. The token status changes to \"suspended\".\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                ":id",
+                "suspend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique token ID (begins with `tok_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"wallet_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f6bf7c6-a072-4599-aa05-03b32de8a8c3",
+              "name": "Token suspended successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Pausing subscription at merchant request\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"tok_example123456\",\n  \"merchant_id\": \"mer_example123456\",\n  \"wallet_id\": \"default\",\n  \"status\": \"active\",\n  \"origin\": {\n    \"name\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\",\n    \"address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"line2\": \"Apartment 301\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"description\": \"Monthly plan token\",\n  \"kind\": \"recurring\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  },\n  \"consumer_id\": \"con_example123456\",\n  \"suspensions\": [\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    },\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    }\n  ],\n  \"test\": false,\n  \"version_nr\": 1,\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"updated_at\": \"2026-06-13T00:00:00Z\",\n  \"activated_at\": \"2026-06-13T00:00:00Z\",\n  \"deleted_at\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7724f66-b7b7-4e4a-a8d4-8f63ba727553",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Pausing subscription at merchant request\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70c9751a-7caf-4aec-96f0-55eb82df2e7e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Pausing subscription at merchant request\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4547f7fc-65b3-458c-9183-3e654942e618",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Pausing subscription at merchant request\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63ecb3ff-522e-4688-bebd-39baf6b3aa6d",
+              "name": "Token not found or deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Pausing subscription at merchant request\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba92e76d-b26c-4a36-9afc-74f2a1410954",
+          "name": "Resume a token",
+          "request": {
+            "name": "Resume a token",
+            "description": {
+              "content": "Resumes a suspended token, allowing it to be used for payments again. The token status changes to \"active\".\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                ":id",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique token ID (begins with `tok_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"wallet_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2be2582e-5137-4191-848a-11e54f21f4c3",
+              "name": "Token resumed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Resuming subscription\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"tok_example123456\",\n  \"merchant_id\": \"mer_example123456\",\n  \"wallet_id\": \"default\",\n  \"status\": \"active\",\n  \"origin\": {\n    \"name\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\",\n    \"address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"line2\": \"Apartment 301\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"description\": \"Monthly plan token\",\n  \"kind\": \"recurring\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  },\n  \"consumer_id\": \"con_example123456\",\n  \"suspensions\": [\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    },\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    }\n  ],\n  \"test\": false,\n  \"version_nr\": 1,\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"updated_at\": \"2026-06-13T00:00:00Z\",\n  \"activated_at\": \"2026-06-13T00:00:00Z\",\n  \"deleted_at\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e990d362-f0ff-4ec5-b635-57315a909a87",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Resuming subscription\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84fff5ef-f5bc-4ad7-8544-e038e3846e22",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Resuming subscription\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90cb25e2-dfb0-46f6-b14a-29c920c94836",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Resuming subscription\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "533652a8-8a94-4cfe-99b1-b87fc2b73d08",
+              "name": "Token not found or deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"merchant.requested\",\n    \"description\": \"Resuming subscription\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01a8d32b-1774-4c3e-bbba-7c78e22abbf7",
+          "name": "Delete a token",
+          "request": {
+            "name": "Delete a token",
+            "description": {
+              "content": "Permanently deletes a token. Deleted tokens cannot be recovered. The token status changes to \"deleted\" and the deleted_at timestamp is populated.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                ":id",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique token ID (begins with `tok_`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version date. Recommended value is 2018-04-10.",
+                "key": "Paidy-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"wallet_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a368b312-4d70-4a8f-8d37-75d311f9d984",
+              "name": "Token deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"consumer.requested\",\n    \"description\": \"Consumer requested cancellation\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"tok_example123456\",\n  \"merchant_id\": \"mer_example123456\",\n  \"wallet_id\": \"default\",\n  \"status\": \"active\",\n  \"origin\": {\n    \"name\": \"Taro Yamada\",\n    \"email\": \"taro@example.com\",\n    \"phone\": \"090-1234-5678\",\n    \"address\": {\n      \"line1\": \"Shibuya 1-1\",\n      \"line2\": \"Apartment 301\",\n      \"city\": \"Tokyo\",\n      \"state\": \"Tokyo\",\n      \"zip\": \"150-0001\"\n    }\n  },\n  \"description\": \"Monthly plan token\",\n  \"kind\": \"recurring\",\n  \"metadata\": {\n    \"custom_field\": \"value\"\n  },\n  \"consumer_id\": \"con_example123456\",\n  \"suspensions\": [\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    },\n    {\n      \"created_at\": \"2026-06-13T00:00:00Z\",\n      \"authority\": \"merchant\"\n    }\n  ],\n  \"test\": false,\n  \"version_nr\": 1,\n  \"created_at\": \"2026-06-13T00:00:00Z\",\n  \"updated_at\": \"2026-06-13T00:00:00Z\",\n  \"activated_at\": \"2026-06-13T00:00:00Z\",\n  \"deleted_at\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "887718c8-d404-4ea1-b369-13dd1573f93a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"consumer.requested\",\n    \"description\": \"Consumer requested cancellation\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ec913fe-f5a8-4858-a5e9-d39ba2d409c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"consumer.requested\",\n    \"description\": \"Consumer requested cancellation\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2295b0f3-512b-4781-b3d2-121063ed4f29",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"consumer.requested\",\n    \"description\": \"Consumer requested cancellation\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e42e5e26-8c78-4cd8-a9da-2aafbcadb7bf",
+              "name": "Token not found or already deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique token ID (begins with `tok_`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version date. Recommended value is 2018-04-10.",
+                    "key": "Paidy-Version",
+                    "value": "2018-04-10"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet_id\": \"default\",\n  \"reason\": {\n    \"code\": \"consumer.requested\",\n    \"description\": \"Consumer requested cancellation\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"request_content.malformed\",\n  \"message\": \"Missing or incorrectly formatted required fields\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.paidy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "42f5ec29-e316-420a-a184-b3bd977c7137",
+    "name": "Paidy Payments Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables Japanese consumers to make purchases and pay later via monthly consolidated billing. Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred payments, manage authorizations, capture funds, issue refunds, and handle recurring payments via stored tokens.\n\n\nContact Support:\n Name: Paidy Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

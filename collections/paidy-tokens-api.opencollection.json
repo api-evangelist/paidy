@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paidy Payments Tokens API",
+    "version": "2018-04-10"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paidy.com/tokens/",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves all tokens associated with the merchant. Returns only tokens with \"active\" or \"suspended\" status (not deleted tokens).\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paidy.com/tokens/:id",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique token ID (begins with `tok_`)"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific token by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Suspend a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/tokens/:id/suspend",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique token ID (begins with `tok_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Suspends an active token, preventing it from being used for new payments. The token status changes to \"suspended\".\n"
+        },
+        {
+          "info": {
+            "name": "Resume a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/tokens/:id/resume",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique token ID (begins with `tok_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resumes a suspended token, allowing it to be used for payments again. The token status changes to \"active\".\n"
+        },
+        {
+          "info": {
+            "name": "Delete a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/tokens/:id/delete",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique token ID (begins with `tok_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permanently deletes a token. Deleted tokens cannot be recovered. The token status changes to \"deleted\" and the deleted_at timestamp is populated.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

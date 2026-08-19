@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paidy Payments API",
+    "version": "2018-04-10"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/payments",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new payment using a stored Paidy token. Used for recurring/subscription billing where the consumer has previously authorized a token via Paidy Checkout.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paidy.com/payments/:id",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment ID (begins with `pay_`)"
+              }
+            ]
+          },
+          "docs": "Retrieves a payment by its unique ID, including all captures and refunds."
+        },
+        {
+          "info": {
+            "name": "Update a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.paidy.com/payments/:id",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment ID (begins with `pay_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a payment's order reference, description, or metadata. Only these three fields can be updated; all others are ignored.\n"
+        },
+        {
+          "info": {
+            "name": "Capture a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/payments/:id/captures",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment ID (begins with `pay_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Captures a previously authorized payment. The payment status changes to \"closed\" after a successful capture. An empty JSON object must be provided in the request body.\n"
+        },
+        {
+          "info": {
+            "name": "Refund a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/payments/:id/refunds",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment ID (begins with `pay_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refunds a captured payment, either fully or partially. Requires a capture ID. Omit the amount field for a full refund.\n"
+        },
+        {
+          "info": {
+            "name": "Close a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paidy.com/payments/:id/close",
+            "headers": [
+              {
+                "name": "Paidy-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment ID (begins with `pay_`)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Closes an authorized payment without capturing it. After closing, the payment cannot be captured. An empty JSON object must be provided in the request body.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
