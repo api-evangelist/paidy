@@ -1,28 +1,31 @@
-# Kin Score artifact — paidy — 2026-08-04T083143
+# Kin Score artifact — paidy — 2026-09-01T210448
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: paidy
-  schema_version: 0.9
-  scored_at: '2026-08-04'
-  run_ts: 2026-08-04T083143
-  composite: 46.2
+  schema_version: 0.18.0
+  scored_at: '2026-09-01'
+  run_ts: 2026-09-01T210448
+  composite: 40.8
   band: developing
   facets:
-    discoverability: 74.1
-    contract_quality: 71.7
-    governance: 58.3
+    discoverability: 68.5
+    contract_quality: 64.1
+    governance: 9.8
     operational_transparency: 23.7
-    developer_ergonomics: 26.1
+    developer_ergonomics: 28.6
     commercial_clarity: 39.5
+    contract_governance: 9.8
+    access_clarity: 39.5
   agent_readiness:
-    score: 49.5
+    score: 36.6
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
+      reversibility_documented: documented
       mcp_server: false
-      auth_clarity: true
+      auth_clarity: bearer
       idempotency: false
       error_semantics: verified
       openapi_examples: verified
@@ -33,6 +36,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   regulatory:
     applies: true
     regime: Payments
