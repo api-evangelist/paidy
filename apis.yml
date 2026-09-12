@@ -125,6 +125,8 @@ apis:
   - type: Documentation
     url: https://paidy.com/docs/en/tokens.html
 common:
+  - type: Website
+    url: https://www.paidy.com/
   - type: AgenticAccess
     url: agentic-access/paidy-agentic-access.yml
   - type: DomainSecurity
