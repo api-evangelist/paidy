@@ -33,6 +33,14 @@ modified: "2026-06-13"
 specificationVersion: '0.23'
 tags:
   - Buy Now Pay Later
+  - Payments
+  - Japan
+  - Checkout
+  - Deferred Payments
+  - Recurring Payments
+  - Tokens
+tags_raw:
+  - Buy Now Pay Later
   - BNPL
   - Payments
   - Japan
@@ -50,6 +58,12 @@ apis:
   humanURL: https://paidy.com/docs/en/paidycheckout.html
   baseURL: https://apps.paidy.com
   tags:
+  - Checkout
+  - JavaScript
+  - Consumer Authentication
+  - Buy Now Pay Later
+  - Japan
+  tags_raw:
   - Checkout
   - JavaScript
   - Consumer Authentication
