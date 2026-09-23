@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Paidy Payments API
-  description: 'Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables Japanese consumers to make purchases and pay later via monthly consolidated billing. Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred payments, manage authorizations, capture funds, issue refunds, and handle recurring payments via stored tokens.
-
-    '
+  description: Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables Japanese consumers to make purchases and pay later via monthly consolidated billing. Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred payments, manage authorizations, capture funds, issue refunds, and handle recurring payments via stored tokens.
   version: '2018-04-10'
   contact:
     name: Paidy Developer Support
@@ -26,9 +24,7 @@ paths:
       tags:
       - Payments
       summary: Create a payment
-      description: 'Creates a new payment using a stored Paidy token. Used for recurring/subscription billing where the consumer has previously authorized a token via Paidy Checkout.
-
-        '
+      description: Creates a new payment using a stored Paidy token. Used for recurring/subscription billing where the consumer has previously authorized a token via Paidy Checkout.
       operationId: createPayment
       parameters:
       - $ref: '#/components/parameters/PaidyVersion'
@@ -137,9 +133,7 @@ paths:
       tags:
       - Payments
       summary: Update a payment
-      description: 'Updates a payment''s order reference, description, or metadata. Only these three fields can be updated; all others are ignored.
-
-        '
+      description: Updates a payment's order reference, description, or metadata. Only these three fields can be updated; all others are ignored.
       operationId: updatePayment
       parameters:
       - $ref: '#/components/parameters/PaymentId'
@@ -186,9 +180,7 @@ paths:
       tags:
       - Payments
       summary: Capture a payment
-      description: 'Captures a previously authorized payment. The payment status changes to "closed" after a successful capture. An empty JSON object must be provided in the request body.
-
-        '
+      description: Captures a previously authorized payment. The payment status changes to "closed" after a successful capture. An empty JSON object must be provided in the request body.
       operationId: capturePayment
       parameters:
       - $ref: '#/components/parameters/PaymentId'
@@ -237,9 +229,7 @@ paths:
       tags:
       - Payments
       summary: Refund a payment
-      description: 'Refunds a captured payment, either fully or partially. Requires a capture ID. Omit the amount field for a full refund.
-
-        '
+      description: Refunds a captured payment, either fully or partially. Requires a capture ID. Omit the amount field for a full refund.
       operationId: refundPayment
       parameters:
       - $ref: '#/components/parameters/PaymentId'
@@ -291,9 +281,7 @@ paths:
       tags:
       - Payments
       summary: Close a payment
-      description: 'Closes an authorized payment without capturing it. After closing, the payment cannot be captured. An empty JSON object must be provided in the request body.
-
-        '
+      description: Closes an authorized payment without capturing it. After closing, the payment cannot be captured. An empty JSON object must be provided in the request body.
       operationId: closePayment
       parameters:
       - $ref: '#/components/parameters/PaymentId'
@@ -345,48 +333,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Capture:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique capture ID (begins with `cap_`)
-          example: cap_example123456
-        created_at:
-          type: string
-          format: date-time
-          description: ISO 8601 creation timestamp
-          example: '2026-06-13T00:00:00Z'
-        amount:
-          type: number
-          format: double
-          description: Captured amount in JPY
-          example: 5000
-        tax:
-          type: number
-          format: double
-          description: Tax amount captured
-          example: 500
-        shipping:
-          type: number
-          format: double
-          description: Shipping amount captured
-          example: 0
-        items:
-          type: array
-          description: Order items captured
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Metadata:
-      type: object
-      description: Key-value map for arbitrary data; maximum 20 keys
-      additionalProperties:
-        type: string
-      maxProperties: 20
-      example:
-        custom_field: value
     Address:
       type: object
       properties:
@@ -410,11 +356,170 @@ components:
           type: string
           description: Postal code in format NNN-NNNN; required with at least one other field
           example: 150-0001
-    CapturePaymentRequest:
+    OrderItem:
       type: object
+      required:
+      - quantity
+      - unit_price
       properties:
+        quantity:
+          type: integer
+          description: Item quantity
+          example: 1
+        id:
+          type: string
+          description: Merchant product ID
+          example: prod_001
+        title:
+          type: string
+          description: Item name for display
+          example: Subscription Plan A
+        description:
+          type: string
+          description: Item details
+          example: Monthly subscription
+        unit_price:
+          type: number
+          format: double
+          description: Per-unit price in JPY; use negative value for discounts
+          example: 5000
+    RefundPaymentRequest:
+      type: object
+      required:
+      - capture_id
+      properties:
+        capture_id:
+          type: string
+          description: Capture ID to refund (begins with `cap_`)
+          example: cap_example123456
+        amount:
+          type: number
+          format: double
+          description: Refund amount in JPY; omit for full refund
+          example: 2500
+        reason:
+          type: string
+          description: Refund reason description
+          example: Customer returned item
         metadata:
           $ref: '#/components/schemas/Metadata'
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique payment ID (begins with `pay_`)
+          example: pay_example123456
+        status:
+          type: string
+          description: Current payment status
+          enum:
+          - authorized
+          - closed
+          - rejected
+          example: authorized
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: '2026-06-13T00:00:00Z'
+        expires_at:
+          type: string
+          format: date-time
+          description: ISO 8601 expiration deadline for authorization
+          example: '2026-07-13T00:00:00Z'
+        amount:
+          type: number
+          format: double
+          description: Total payment amount in JPY
+          example: 5000
+        currency:
+          type: string
+          description: Currency code
+          example: JPY
+        description:
+          type: string
+          description: Payment description
+          example: Monthly subscription payment
+        store_name:
+          type: string
+          description: Merchant store name
+          example: My Store
+        test:
+          type: boolean
+          description: Indicates if this is a test payment
+          example: false
+        tier:
+          type: string
+          description: Payment tier
+          example: classic
+        buyer:
+          $ref: '#/components/schemas/Buyer'
+        order:
+          $ref: '#/components/schemas/Order'
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+        captures:
+          type: array
+          description: List of captures for this payment
+          items:
+            $ref: '#/components/schemas/Capture'
+        refunds:
+          type: array
+          description: List of refunds for this payment
+          items:
+            $ref: '#/components/schemas/Refund'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    CreatePaymentRequest:
+      type: object
+      required:
+      - token_id
+      - amount
+      - currency
+      - buyer_data
+      - order
+      - shipping_address
+      properties:
+        token_id:
+          type: string
+          description: Paidy-generated token ID (begins with `tok_`)
+          example: tok_example123456
+        amount:
+          type: number
+          format: double
+          description: Total payment amount including tax and shipping in JPY
+          example: 5000
+        currency:
+          type: string
+          description: Currency code; must be JPY
+          enum:
+          - JPY
+          example: JPY
+        description:
+          type: string
+          description: Payment description
+          example: Monthly subscription payment
+        store_name:
+          type: string
+          description: Merchant store name for display
+          example: My Store
+        buyer_data:
+          $ref: '#/components/schemas/BuyerData'
+        order:
+          $ref: '#/components/schemas/Order'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+    Metadata:
+      type: object
+      description: Key-value map for arbitrary data; maximum 20 keys
+      additionalProperties:
+        type: string
+      maxProperties: 20
+      example:
+        custom_field: value
     BuyerData:
       type: object
       required:
@@ -519,80 +624,6 @@ components:
           description: Categories of ordered items (comma-separated)
           items:
             type: string
-    RefundPaymentRequest:
-      type: object
-      required:
-      - capture_id
-      properties:
-        capture_id:
-          type: string
-          description: Capture ID to refund (begins with `cap_`)
-          example: cap_example123456
-        amount:
-          type: number
-          format: double
-          description: Refund amount in JPY; omit for full refund
-          example: 2500
-        reason:
-          type: string
-          description: Refund reason description
-          example: Customer returned item
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Refund:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique refund ID (begins with `ref_`)
-          example: ref_example123456
-        created_at:
-          type: string
-          format: date-time
-          description: ISO 8601 creation timestamp
-          example: '2026-06-13T00:00:00Z'
-        capture_id:
-          type: string
-          description: Associated capture ID
-          example: cap_example123456
-        amount:
-          type: number
-          format: double
-          description: Refunded amount in JPY
-          example: 2500
-        reason:
-          type: string
-          description: Refund reason
-          example: Customer returned item
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    OrderItem:
-      type: object
-      required:
-      - quantity
-      - unit_price
-      properties:
-        quantity:
-          type: integer
-          description: Item quantity
-          example: 1
-        id:
-          type: string
-          description: Merchant product ID
-          example: prod_001
-        title:
-          type: string
-          description: Item name for display
-          example: Subscription Plan A
-        description:
-          type: string
-          description: Item details
-          example: Monthly subscription
-        unit_price:
-          type: number
-          format: double
-          description: Per-unit price in JPY; use negative value for discounts
-          example: 5000
     Order:
       type: object
       required:
@@ -622,6 +653,87 @@ components:
           format: date-time
           description: ISO 8601 timestamp of last update
           readOnly: true
+    CapturePaymentRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 400
+        code:
+          type: string
+          description: Paidy error code
+          example: request_content.malformed
+        message:
+          type: string
+          description: Human-readable error description
+          example: Missing or incorrectly formatted required fields
+    Capture:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique capture ID (begins with `cap_`)
+          example: cap_example123456
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: '2026-06-13T00:00:00Z'
+        amount:
+          type: number
+          format: double
+          description: Captured amount in JPY
+          example: 5000
+        tax:
+          type: number
+          format: double
+          description: Tax amount captured
+          example: 500
+        shipping:
+          type: number
+          format: double
+          description: Shipping amount captured
+          example: 0
+        items:
+          type: array
+          description: Order items captured
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique refund ID (begins with `ref_`)
+          example: ref_example123456
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: '2026-06-13T00:00:00Z'
+        capture_id:
+          type: string
+          description: Associated capture ID
+          example: cap_example123456
+        amount:
+          type: number
+          format: double
+          description: Refunded amount in JPY
+          example: 2500
+        reason:
+          type: string
+          description: Refund reason
+          example: Customer returned item
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     Buyer:
       type: object
       properties:
@@ -642,74 +754,6 @@ components:
           type: string
           description: Consumer's phone number
           example: 090-1234-5678
-    Payment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique payment ID (begins with `pay_`)
-          example: pay_example123456
-        status:
-          type: string
-          description: Current payment status
-          enum:
-          - authorized
-          - closed
-          - rejected
-          example: authorized
-        created_at:
-          type: string
-          format: date-time
-          description: ISO 8601 creation timestamp
-          example: '2026-06-13T00:00:00Z'
-        expires_at:
-          type: string
-          format: date-time
-          description: ISO 8601 expiration deadline for authorization
-          example: '2026-07-13T00:00:00Z'
-        amount:
-          type: number
-          format: double
-          description: Total payment amount in JPY
-          example: 5000
-        currency:
-          type: string
-          description: Currency code
-          example: JPY
-        description:
-          type: string
-          description: Payment description
-          example: Monthly subscription payment
-        store_name:
-          type: string
-          description: Merchant store name
-          example: My Store
-        test:
-          type: boolean
-          description: Indicates if this is a test payment
-          example: false
-        tier:
-          type: string
-          description: Payment tier
-          example: classic
-        buyer:
-          $ref: '#/components/schemas/Buyer'
-        order:
-          $ref: '#/components/schemas/Order'
-        shipping_address:
-          $ref: '#/components/schemas/Address'
-        captures:
-          type: array
-          description: List of captures for this payment
-          items:
-            $ref: '#/components/schemas/Capture'
-        refunds:
-          type: array
-          description: List of refunds for this payment
-          items:
-            $ref: '#/components/schemas/Refund'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     UpdatePaymentRequest:
       type: object
       properties:
@@ -723,71 +767,7 @@ components:
           example: Updated description
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-          example: 400
-        code:
-          type: string
-          description: Paidy error code
-          example: request_content.malformed
-        message:
-          type: string
-          description: Human-readable error description
-          example: Missing or incorrectly formatted required fields
-    CreatePaymentRequest:
-      type: object
-      required:
-      - token_id
-      - amount
-      - currency
-      - buyer_data
-      - order
-      - shipping_address
-      properties:
-        token_id:
-          type: string
-          description: Paidy-generated token ID (begins with `tok_`)
-          example: tok_example123456
-        amount:
-          type: number
-          format: double
-          description: Total payment amount including tax and shipping in JPY
-          example: 5000
-        currency:
-          type: string
-          description: Currency code; must be JPY
-          enum:
-          - JPY
-          example: JPY
-        description:
-          type: string
-          description: Payment description
-          example: Monthly subscription payment
-        store_name:
-          type: string
-          description: Merchant store name for display
-          example: My Store
-        buyer_data:
-          $ref: '#/components/schemas/BuyerData'
-        order:
-          $ref: '#/components/schemas/Order'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        shipping_address:
-          $ref: '#/components/schemas/Address'
   parameters:
-    PaymentId:
-      name: id
-      in: path
-      required: true
-      description: Unique payment ID (begins with `pay_`)
-      schema:
-        type: string
-        example: pay_example123456
     PaidyVersion:
       name: Paidy-Version
       in: header
@@ -796,6 +776,14 @@ components:
       schema:
         type: string
         example: '2018-04-10'
+    PaymentId:
+      name: id
+      in: path
+      required: true
+      description: Unique payment ID (begins with `pay_`)
+      schema:
+        type: string
+        example: pay_example123456
   securitySchemes:
     BearerAuth:
       type: http
