@@ -242,6 +242,45 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    TokenReason:
+      type: object
+      required:
+      - code
+      - description
+      properties:
+        code:
+          type: string
+          description: Reason code for token suspension or resumption
+          enum:
+          - consumer.requested
+          - merchant.requested
+          - fraud.suspected
+          - general
+          example: merchant.requested
+        description:
+          type: string
+          description: Explanation for the action
+          example: Pausing subscription at merchant request
+    TokenDeleteReason:
+      type: object
+      required:
+      - code
+      - description
+      properties:
+        code:
+          type: string
+          description: Reason code for token deletion
+          enum:
+          - consumer.requested
+          - subscription.expired
+          - merchant.requested
+          - fraud.detected
+          - general
+          example: consumer.requested
+        description:
+          type: string
+          description: Explanation for the deletion
+          example: Consumer requested cancellation
     Address:
       type: object
       properties:
@@ -265,6 +304,41 @@ components:
           type: string
           description: Postal code in format NNN-NNNN; required with at least one other field
           example: 150-0001
+    Suspension:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when suspension occurred
+          example: '2026-06-13T00:00:00Z'
+        authority:
+          type: string
+          description: Entity that performed the suspension
+          example: merchant
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 400
+        code:
+          type: string
+          description: Paidy error code
+          example: request_content.malformed
+        message:
+          type: string
+          description: Human-readable error description
+          example: Missing or incorrectly formatted required fields
+    Metadata:
+      type: object
+      description: Key-value map for arbitrary data; maximum 20 keys
+      additionalProperties:
+        type: string
+      maxProperties: 20
+      example:
+        custom_field: value
     ConsumerOrigin:
       type: object
       properties:
@@ -283,6 +357,17 @@ components:
           example: 090-1234-5678
         address:
           $ref: '#/components/schemas/Address'
+    TokenActionRequest:
+      type: object
+      required:
+      - reason
+      properties:
+        wallet_id:
+          type: string
+          description: Merchant wallet identifier; defaults to "default"
+          example: default
+        reason:
+          $ref: '#/components/schemas/TokenReason'
     Token:
       type: object
       properties:
@@ -357,44 +442,6 @@ components:
           format: date-time
           description: ISO 8601 deletion timestamp; null if not deleted
           example: null
-    TokenActionRequest:
-      type: object
-      required:
-      - reason
-      properties:
-        wallet_id:
-          type: string
-          description: Merchant wallet identifier; defaults to "default"
-          example: default
-        reason:
-          $ref: '#/components/schemas/TokenReason'
-    TokenReason:
-      type: object
-      required:
-      - code
-      - description
-      properties:
-        code:
-          type: string
-          description: Reason code for token suspension or resumption
-          enum:
-          - consumer.requested
-          - merchant.requested
-          - fraud.suspected
-          - general
-          example: merchant.requested
-        description:
-          type: string
-          description: Explanation for the action
-          example: Pausing subscription at merchant request
-    Metadata:
-      type: object
-      description: Key-value map for arbitrary data; maximum 20 keys
-      additionalProperties:
-        type: string
-      maxProperties: 20
-      example:
-        custom_field: value
     TokenDeleteRequest:
       type: object
       required:
@@ -406,53 +453,6 @@ components:
           example: default
         reason:
           $ref: '#/components/schemas/TokenDeleteReason'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-          example: 400
-        code:
-          type: string
-          description: Paidy error code
-          example: request_content.malformed
-        message:
-          type: string
-          description: Human-readable error description
-          example: Missing or incorrectly formatted required fields
-    Suspension:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when suspension occurred
-          example: '2026-06-13T00:00:00Z'
-        authority:
-          type: string
-          description: Entity that performed the suspension
-          example: merchant
-    TokenDeleteReason:
-      type: object
-      required:
-      - code
-      - description
-      properties:
-        code:
-          type: string
-          description: Reason code for token deletion
-          enum:
-          - consumer.requested
-          - subscription.expired
-          - merchant.requested
-          - fraud.detected
-          - general
-          example: consumer.requested
-        description:
-          type: string
-          description: Explanation for the deletion
-          example: Consumer requested cancellation
   parameters:
     PaidyVersion:
       name: Paidy-Version

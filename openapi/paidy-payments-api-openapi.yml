@@ -333,56 +333,39 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Address:
+    Buyer:
       type: object
       properties:
-        line1:
+        name1:
           type: string
-          description: Building or apartment information
-          example: Shibuya 1-1
-        line2:
+          description: Consumer's full name (kanji/kana)
+          example: 山田 太郎
+        name2:
           type: string
-          description: District or land details
-          example: Apartment 301
-        city:
+          description: Consumer's name in alternate script
+          example: Taro Yamada
+        email:
           type: string
-          description: Municipality name
-          example: Tokyo
-        state:
+          format: email
+          description: Consumer's email address
+          example: taro@example.com
+        phone:
           type: string
-          description: Prefecture name
-          example: Tokyo
-        zip:
-          type: string
-          description: Postal code in format NNN-NNNN; required with at least one other field
-          example: 150-0001
-    OrderItem:
+          description: Consumer's phone number
+          example: 090-1234-5678
+    UpdatePaymentRequest:
       type: object
-      required:
-      - quantity
-      - unit_price
       properties:
-        quantity:
-          type: integer
-          description: Item quantity
-          example: 1
-        id:
+        order_ref:
           type: string
-          description: Merchant product ID
-          example: prod_001
-        title:
-          type: string
-          description: Item name for display
-          example: Subscription Plan A
+          description: Merchant-defined order reference ID
+          example: order_20260613_001
         description:
           type: string
-          description: Item details
-          example: Monthly subscription
-        unit_price:
-          type: number
-          format: double
-          description: Per-unit price in JPY; use negative value for discounts
-          example: 5000
+          description: Payment description
+          example: Updated description
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     RefundPaymentRequest:
       type: object
       required:
@@ -401,74 +384,6 @@ components:
           type: string
           description: Refund reason description
           example: Customer returned item
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Payment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique payment ID (begins with `pay_`)
-          example: pay_example123456
-        status:
-          type: string
-          description: Current payment status
-          enum:
-          - authorized
-          - closed
-          - rejected
-          example: authorized
-        created_at:
-          type: string
-          format: date-time
-          description: ISO 8601 creation timestamp
-          example: '2026-06-13T00:00:00Z'
-        expires_at:
-          type: string
-          format: date-time
-          description: ISO 8601 expiration deadline for authorization
-          example: '2026-07-13T00:00:00Z'
-        amount:
-          type: number
-          format: double
-          description: Total payment amount in JPY
-          example: 5000
-        currency:
-          type: string
-          description: Currency code
-          example: JPY
-        description:
-          type: string
-          description: Payment description
-          example: Monthly subscription payment
-        store_name:
-          type: string
-          description: Merchant store name
-          example: My Store
-        test:
-          type: boolean
-          description: Indicates if this is a test payment
-          example: false
-        tier:
-          type: string
-          description: Payment tier
-          example: classic
-        buyer:
-          $ref: '#/components/schemas/Buyer'
-        order:
-          $ref: '#/components/schemas/Order'
-        shipping_address:
-          $ref: '#/components/schemas/Address'
-        captures:
-          type: array
-          description: List of captures for this payment
-          items:
-            $ref: '#/components/schemas/Capture'
-        refunds:
-          type: array
-          description: List of refunds for this payment
-          items:
-            $ref: '#/components/schemas/Refund'
         metadata:
           $ref: '#/components/schemas/Metadata'
     CreatePaymentRequest:
@@ -512,14 +427,76 @@ components:
           $ref: '#/components/schemas/Metadata'
         shipping_address:
           $ref: '#/components/schemas/Address'
-    Metadata:
+    Address:
       type: object
-      description: Key-value map for arbitrary data; maximum 20 keys
-      additionalProperties:
-        type: string
-      maxProperties: 20
-      example:
-        custom_field: value
+      properties:
+        line1:
+          type: string
+          description: Building or apartment information
+          example: Shibuya 1-1
+        line2:
+          type: string
+          description: District or land details
+          example: Apartment 301
+        city:
+          type: string
+          description: Municipality name
+          example: Tokyo
+        state:
+          type: string
+          description: Prefecture name
+          example: Tokyo
+        zip:
+          type: string
+          description: Postal code in format NNN-NNNN; required with at least one other field
+          example: 150-0001
+    CapturePaymentRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique refund ID (begins with `ref_`)
+          example: ref_example123456
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 creation timestamp
+          example: '2026-06-13T00:00:00Z'
+        capture_id:
+          type: string
+          description: Associated capture ID
+          example: cap_example123456
+        amount:
+          type: number
+          format: double
+          description: Refunded amount in JPY
+          example: 2500
+        reason:
+          type: string
+          description: Refund reason
+          example: Customer returned item
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 400
+        code:
+          type: string
+          description: Paidy error code
+          example: request_content.malformed
+        message:
+          type: string
+          description: Human-readable error description
+          example: Missing or incorrectly formatted required fields
     BuyerData:
       type: object
       required:
@@ -624,55 +601,14 @@ components:
           description: Categories of ordered items (comma-separated)
           items:
             type: string
-    Order:
+    Metadata:
       type: object
-      required:
-      - items
-      properties:
-        items:
-          type: array
-          description: List of order items
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        tax:
-          type: number
-          format: double
-          description: Total tax amount in JPY
-          example: 500
-        shipping:
-          type: number
-          format: double
-          description: Total shipping cost in JPY
-          example: 0
-        order_ref:
-          type: string
-          description: Merchant-defined order reference ID
-          example: order_20260613_001
-        updated_at:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp of last update
-          readOnly: true
-    CapturePaymentRequest:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-          example: 400
-        code:
-          type: string
-          description: Paidy error code
-          example: request_content.malformed
-        message:
-          type: string
-          description: Human-readable error description
-          example: Missing or incorrectly formatted required fields
+      description: Key-value map for arbitrary data; maximum 20 keys
+      additionalProperties:
+        type: string
+      maxProperties: 20
+      example:
+        custom_field: value
     Capture:
       type: object
       properties:
@@ -707,64 +643,128 @@ components:
             $ref: '#/components/schemas/OrderItem'
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Refund:
+    Order:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          description: List of order items
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        tax:
+          type: number
+          format: double
+          description: Total tax amount in JPY
+          example: 500
+        shipping:
+          type: number
+          format: double
+          description: Total shipping cost in JPY
+          example: 0
+        order_ref:
+          type: string
+          description: Merchant-defined order reference ID
+          example: order_20260613_001
+        updated_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of last update
+          readOnly: true
+    OrderItem:
+      type: object
+      required:
+      - quantity
+      - unit_price
+      properties:
+        quantity:
+          type: integer
+          description: Item quantity
+          example: 1
+        id:
+          type: string
+          description: Merchant product ID
+          example: prod_001
+        title:
+          type: string
+          description: Item name for display
+          example: Subscription Plan A
+        description:
+          type: string
+          description: Item details
+          example: Monthly subscription
+        unit_price:
+          type: number
+          format: double
+          description: Per-unit price in JPY; use negative value for discounts
+          example: 5000
+    Payment:
       type: object
       properties:
         id:
           type: string
-          description: Unique refund ID (begins with `ref_`)
-          example: ref_example123456
+          description: Unique payment ID (begins with `pay_`)
+          example: pay_example123456
+        status:
+          type: string
+          description: Current payment status
+          enum:
+          - authorized
+          - closed
+          - rejected
+          example: authorized
         created_at:
           type: string
           format: date-time
           description: ISO 8601 creation timestamp
           example: '2026-06-13T00:00:00Z'
-        capture_id:
+        expires_at:
           type: string
-          description: Associated capture ID
-          example: cap_example123456
+          format: date-time
+          description: ISO 8601 expiration deadline for authorization
+          example: '2026-07-13T00:00:00Z'
         amount:
           type: number
           format: double
-          description: Refunded amount in JPY
-          example: 2500
-        reason:
+          description: Total payment amount in JPY
+          example: 5000
+        currency:
           type: string
-          description: Refund reason
-          example: Customer returned item
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    Buyer:
-      type: object
-      properties:
-        name1:
-          type: string
-          description: Consumer's full name (kanji/kana)
-          example: 山田 太郎
-        name2:
-          type: string
-          description: Consumer's name in alternate script
-          example: Taro Yamada
-        email:
-          type: string
-          format: email
-          description: Consumer's email address
-          example: taro@example.com
-        phone:
-          type: string
-          description: Consumer's phone number
-          example: 090-1234-5678
-    UpdatePaymentRequest:
-      type: object
-      properties:
-        order_ref:
-          type: string
-          description: Merchant-defined order reference ID
-          example: order_20260613_001
+          description: Currency code
+          example: JPY
         description:
           type: string
           description: Payment description
-          example: Updated description
+          example: Monthly subscription payment
+        store_name:
+          type: string
+          description: Merchant store name
+          example: My Store
+        test:
+          type: boolean
+          description: Indicates if this is a test payment
+          example: false
+        tier:
+          type: string
+          description: Payment tier
+          example: classic
+        buyer:
+          $ref: '#/components/schemas/Buyer'
+        order:
+          $ref: '#/components/schemas/Order'
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+        captures:
+          type: array
+          description: List of captures for this payment
+          items:
+            $ref: '#/components/schemas/Capture'
+        refunds:
+          type: array
+          description: List of refunds for this payment
+          items:
+            $ref: '#/components/schemas/Refund'
         metadata:
           $ref: '#/components/schemas/Metadata'
   parameters:
