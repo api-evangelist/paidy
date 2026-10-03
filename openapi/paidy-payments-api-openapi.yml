@@ -333,128 +333,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Buyer:
-      type: object
-      properties:
-        name1:
-          type: string
-          description: Consumer's full name (kanji/kana)
-          example: 山田 太郎
-        name2:
-          type: string
-          description: Consumer's name in alternate script
-          example: Taro Yamada
-        email:
-          type: string
-          format: email
-          description: Consumer's email address
-          example: taro@example.com
-        phone:
-          type: string
-          description: Consumer's phone number
-          example: 090-1234-5678
-    UpdatePaymentRequest:
-      type: object
-      properties:
-        order_ref:
-          type: string
-          description: Merchant-defined order reference ID
-          example: order_20260613_001
-        description:
-          type: string
-          description: Payment description
-          example: Updated description
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    RefundPaymentRequest:
-      type: object
-      required:
-      - capture_id
-      properties:
-        capture_id:
-          type: string
-          description: Capture ID to refund (begins with `cap_`)
-          example: cap_example123456
-        amount:
-          type: number
-          format: double
-          description: Refund amount in JPY; omit for full refund
-          example: 2500
-        reason:
-          type: string
-          description: Refund reason description
-          example: Customer returned item
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    CreatePaymentRequest:
-      type: object
-      required:
-      - token_id
-      - amount
-      - currency
-      - buyer_data
-      - order
-      - shipping_address
-      properties:
-        token_id:
-          type: string
-          description: Paidy-generated token ID (begins with `tok_`)
-          example: tok_example123456
-        amount:
-          type: number
-          format: double
-          description: Total payment amount including tax and shipping in JPY
-          example: 5000
-        currency:
-          type: string
-          description: Currency code; must be JPY
-          enum:
-          - JPY
-          example: JPY
-        description:
-          type: string
-          description: Payment description
-          example: Monthly subscription payment
-        store_name:
-          type: string
-          description: Merchant store name for display
-          example: My Store
-        buyer_data:
-          $ref: '#/components/schemas/BuyerData'
-        order:
-          $ref: '#/components/schemas/Order'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        shipping_address:
-          $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      properties:
-        line1:
-          type: string
-          description: Building or apartment information
-          example: Shibuya 1-1
-        line2:
-          type: string
-          description: District or land details
-          example: Apartment 301
-        city:
-          type: string
-          description: Municipality name
-          example: Tokyo
-        state:
-          type: string
-          description: Prefecture name
-          example: Tokyo
-        zip:
-          type: string
-          description: Postal code in format NNN-NNNN; required with at least one other field
-          example: 150-0001
-    CapturePaymentRequest:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     Refund:
       type: object
       properties:
@@ -482,21 +360,106 @@ components:
           example: Customer returned item
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Error:
+    Metadata:
+      type: object
+      description: Key-value map for arbitrary data; maximum 20 keys
+      additionalProperties:
+        type: string
+      maxProperties: 20
+      example:
+        custom_field: value
+    Buyer:
       type: object
       properties:
-        status:
-          type: integer
-          description: HTTP status code
-          example: 400
-        code:
+        name1:
           type: string
-          description: Paidy error code
-          example: request_content.malformed
-        message:
+          description: Consumer's full name (kanji/kana)
+          example: 山田 太郎
+        name2:
           type: string
-          description: Human-readable error description
-          example: Missing or incorrectly formatted required fields
+          description: Consumer's name in alternate script
+          example: Taro Yamada
+        email:
+          type: string
+          format: email
+          description: Consumer's email address
+          example: taro@example.com
+        phone:
+          type: string
+          description: Consumer's phone number
+          example: 090-1234-5678
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+          description: Building or apartment information
+          example: Shibuya 1-1
+        line2:
+          type: string
+          description: District or land details
+          example: Apartment 301
+        city:
+          type: string
+          description: Municipality name
+          example: Tokyo
+        state:
+          type: string
+          description: Prefecture name
+          example: Tokyo
+        zip:
+          type: string
+          description: Postal code in format NNN-NNNN; required with at least one other field
+          example: 150-0001
+    Order:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          description: List of order items
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        tax:
+          type: number
+          format: double
+          description: Total tax amount in JPY
+          example: 500
+        shipping:
+          type: number
+          format: double
+          description: Total shipping cost in JPY
+          example: 0
+        order_ref:
+          type: string
+          description: Merchant-defined order reference ID
+          example: order_20260613_001
+        updated_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of last update
+          readOnly: true
+    RefundPaymentRequest:
+      type: object
+      required:
+      - capture_id
+      properties:
+        capture_id:
+          type: string
+          description: Capture ID to refund (begins with `cap_`)
+          example: cap_example123456
+        amount:
+          type: number
+          format: double
+          description: Refund amount in JPY; omit for full refund
+          example: 2500
+        reason:
+          type: string
+          description: Refund reason description
+          example: Customer returned item
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     BuyerData:
       type: object
       required:
@@ -601,14 +564,6 @@ components:
           description: Categories of ordered items (comma-separated)
           items:
             type: string
-    Metadata:
-      type: object
-      description: Key-value map for arbitrary data; maximum 20 keys
-      additionalProperties:
-        type: string
-      maxProperties: 20
-      example:
-        custom_field: value
     Capture:
       type: object
       properties:
@@ -643,35 +598,19 @@ components:
             $ref: '#/components/schemas/OrderItem'
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Order:
+    UpdatePaymentRequest:
       type: object
-      required:
-      - items
       properties:
-        items:
-          type: array
-          description: List of order items
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        tax:
-          type: number
-          format: double
-          description: Total tax amount in JPY
-          example: 500
-        shipping:
-          type: number
-          format: double
-          description: Total shipping cost in JPY
-          example: 0
         order_ref:
           type: string
           description: Merchant-defined order reference ID
           example: order_20260613_001
-        updated_at:
+        description:
           type: string
-          format: date-time
-          description: ISO 8601 timestamp of last update
-          readOnly: true
+          description: Payment description
+          example: Updated description
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     OrderItem:
       type: object
       required:
@@ -699,6 +638,67 @@ components:
           format: double
           description: Per-unit price in JPY; use negative value for discounts
           example: 5000
+    CreatePaymentRequest:
+      type: object
+      required:
+      - token_id
+      - amount
+      - currency
+      - buyer_data
+      - order
+      - shipping_address
+      properties:
+        token_id:
+          type: string
+          description: Paidy-generated token ID (begins with `tok_`)
+          example: tok_example123456
+        amount:
+          type: number
+          format: double
+          description: Total payment amount including tax and shipping in JPY
+          example: 5000
+        currency:
+          type: string
+          description: Currency code; must be JPY
+          enum:
+          - JPY
+          example: JPY
+        description:
+          type: string
+          description: Payment description
+          example: Monthly subscription payment
+        store_name:
+          type: string
+          description: Merchant store name for display
+          example: My Store
+        buyer_data:
+          $ref: '#/components/schemas/BuyerData'
+        order:
+          $ref: '#/components/schemas/Order'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 400
+        code:
+          type: string
+          description: Paidy error code
+          example: request_content.malformed
+        message:
+          type: string
+          description: Human-readable error description
+          example: Missing or incorrectly formatted required fields
+    CapturePaymentRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     Payment:
       type: object
       properties:
