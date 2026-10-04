@@ -242,143 +242,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TokenDeleteRequest:
-      type: object
-      required:
-      - reason
-      properties:
-        wallet_id:
-          type: string
-          description: Merchant wallet identifier; defaults to "default"
-          example: default
-        reason:
-          $ref: '#/components/schemas/TokenDeleteReason'
-    Metadata:
-      type: object
-      description: Key-value map for arbitrary data; maximum 20 keys
-      additionalProperties:
-        type: string
-      maxProperties: 20
-      example:
-        custom_field: value
-    Address:
-      type: object
-      properties:
-        line1:
-          type: string
-          description: Building or apartment information
-          example: Shibuya 1-1
-        line2:
-          type: string
-          description: District or land details
-          example: Apartment 301
-        city:
-          type: string
-          description: Municipality name
-          example: Tokyo
-        state:
-          type: string
-          description: Prefecture name
-          example: Tokyo
-        zip:
-          type: string
-          description: Postal code in format NNN-NNNN; required with at least one other field
-          example: 150-0001
-    TokenReason:
-      type: object
-      required:
-      - code
-      - description
-      properties:
-        code:
-          type: string
-          description: Reason code for token suspension or resumption
-          enum:
-          - consumer.requested
-          - merchant.requested
-          - fraud.suspected
-          - general
-          example: merchant.requested
-        description:
-          type: string
-          description: Explanation for the action
-          example: Pausing subscription at merchant request
-    TokenDeleteReason:
-      type: object
-      required:
-      - code
-      - description
-      properties:
-        code:
-          type: string
-          description: Reason code for token deletion
-          enum:
-          - consumer.requested
-          - subscription.expired
-          - merchant.requested
-          - fraud.detected
-          - general
-          example: consumer.requested
-        description:
-          type: string
-          description: Explanation for the deletion
-          example: Consumer requested cancellation
-    Suspension:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when suspension occurred
-          example: '2026-06-13T00:00:00Z'
-        authority:
-          type: string
-          description: Entity that performed the suspension
-          example: merchant
-    TokenActionRequest:
-      type: object
-      required:
-      - reason
-      properties:
-        wallet_id:
-          type: string
-          description: Merchant wallet identifier; defaults to "default"
-          example: default
-        reason:
-          $ref: '#/components/schemas/TokenReason'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: HTTP status code
-          example: 400
-        code:
-          type: string
-          description: Paidy error code
-          example: request_content.malformed
-        message:
-          type: string
-          description: Human-readable error description
-          example: Missing or incorrectly formatted required fields
-    ConsumerOrigin:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Consumer name
-          example: Taro Yamada
-        email:
-          type: string
-          format: email
-          description: Consumer email address
-          example: taro@example.com
-        phone:
-          type: string
-          description: Consumer phone number
-          example: 090-1234-5678
-        address:
-          $ref: '#/components/schemas/Address'
     Token:
       type: object
       properties:
@@ -453,15 +316,144 @@ components:
           format: date-time
           description: ISO 8601 deletion timestamp; null if not deleted
           example: null
-  parameters:
-    TokenId:
-      name: id
-      in: path
-      required: true
-      description: Unique token ID (begins with `tok_`)
-      schema:
+    TokenActionRequest:
+      type: object
+      required:
+      - reason
+      properties:
+        wallet_id:
+          type: string
+          description: Merchant wallet identifier; defaults to "default"
+          example: default
+        reason:
+          $ref: '#/components/schemas/TokenReason'
+    TokenReason:
+      type: object
+      required:
+      - code
+      - description
+      properties:
+        code:
+          type: string
+          description: Reason code for token suspension or resumption
+          enum:
+          - consumer.requested
+          - merchant.requested
+          - fraud.suspected
+          - general
+          example: merchant.requested
+        description:
+          type: string
+          description: Explanation for the action
+          example: Pausing subscription at merchant request
+    TokenDeleteReason:
+      type: object
+      required:
+      - code
+      - description
+      properties:
+        code:
+          type: string
+          description: Reason code for token deletion
+          enum:
+          - consumer.requested
+          - subscription.expired
+          - merchant.requested
+          - fraud.detected
+          - general
+          example: consumer.requested
+        description:
+          type: string
+          description: Explanation for the deletion
+          example: Consumer requested cancellation
+    Suspension:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when suspension occurred
+          example: '2026-06-13T00:00:00Z'
+        authority:
+          type: string
+          description: Entity that performed the suspension
+          example: merchant
+    Metadata:
+      type: object
+      description: Key-value map for arbitrary data; maximum 20 keys
+      additionalProperties:
         type: string
-        example: tok_example123456
+      maxProperties: 20
+      example:
+        custom_field: value
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+          description: Building or apartment information
+          example: Shibuya 1-1
+        line2:
+          type: string
+          description: District or land details
+          example: Apartment 301
+        city:
+          type: string
+          description: Municipality name
+          example: Tokyo
+        state:
+          type: string
+          description: Prefecture name
+          example: Tokyo
+        zip:
+          type: string
+          description: Postal code in format NNN-NNNN; required with at least one other field
+          example: 150-0001
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+          example: 400
+        code:
+          type: string
+          description: Paidy error code
+          example: request_content.malformed
+        message:
+          type: string
+          description: Human-readable error description
+          example: Missing or incorrectly formatted required fields
+    ConsumerOrigin:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Consumer name
+          example: Taro Yamada
+        email:
+          type: string
+          format: email
+          description: Consumer email address
+          example: taro@example.com
+        phone:
+          type: string
+          description: Consumer phone number
+          example: 090-1234-5678
+        address:
+          $ref: '#/components/schemas/Address'
+    TokenDeleteRequest:
+      type: object
+      required:
+      - reason
+      properties:
+        wallet_id:
+          type: string
+          description: Merchant wallet identifier; defaults to "default"
+          example: default
+        reason:
+          $ref: '#/components/schemas/TokenDeleteReason'
+  parameters:
     PaidyVersion:
       name: Paidy-Version
       in: header
@@ -470,6 +462,14 @@ components:
       schema:
         type: string
         example: '2018-04-10'
+    TokenId:
+      name: id
+      in: path
+      required: true
+      description: Unique token ID (begins with `tok_`)
+      schema:
+        type: string
+        example: tok_example123456
   securitySchemes:
     BearerAuth:
       type: http
