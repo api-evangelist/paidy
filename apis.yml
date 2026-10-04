@@ -139,6 +139,9 @@ apis:
   - type: Documentation
     url: https://paidy.com/docs/en/tokens.html
 common:
+  - type: CapabilityMap
+    url: capabilities/paidy-capability-edges.yml
+    name: Paidy Business Capability Map
   - type: Website
     url: https://www.paidy.com/
   - type: AgenticAccess
