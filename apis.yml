@@ -29,7 +29,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paidy.png
 url: https://raw.githubusercontent.com/api-evangelist/paidy/refs/heads/main/apis.yml
 created: "2026-06-13"
-modified: "2026-06-13"
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
   - Buy Now Pay Later
@@ -139,6 +139,8 @@ apis:
   - type: Documentation
     url: https://paidy.com/docs/en/tokens.html
 common:
+  - url: https://corp.paidy.com/news/
+    type: Blog
   - type: CapabilityMap
     url: capabilities/paidy-capability-edges.yml
     name: Paidy Business Capability Map
