@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 rateLimits:
   - name: Paidy API Rate Limits
     description: Paidy does not publish explicit rate limit thresholds in their public API documentation. The API uses HTTPS with Bearer token authentication and requires TLS 1.2+. No documented request-per-second or request-per-minute caps appear in the official Paidy API reference as of June 2026.

@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 plans:
   - name: Merchant Integration
     description: Standard merchant integration plan for accepting Paidy payments. Paidy operates on a merchant fee model rather than tiered API access plans. Merchants are charged a percentage fee per transaction (typically 2.5-3.5% depending on volume and business type). Access to the full Payments API, Tokens API, and Paidy Checkout is included for all integrated merchants. API keys (test and production) are provisioned through the Merchant Dashboard after merchant onboarding.
