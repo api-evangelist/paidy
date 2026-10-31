@@ -64,82 +64,152 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables consumers in Japan to make purchases and pay later through monthly consolidated billing or installment plans. Acquired by PayPal in 2021, Paidy serves as a leading BNPL provider in Japan, allowing consumers to shop without a credit card and pay via bank transfer, convenience store, or direct debit.
+Paidy is a Japanese buy now, pay later (BNPL) and digital payment service that enables Japanese consumers to make purchases and pay later via monthly consolidated billing. Merchants integrate Paidy Checkout (JavaScript) and the Paidy REST API to accept deferred payments, manage authorizations, capture funds, issue refunds, and handle recurring payments via stored tokens.
 
-## APIs
+**Areas:** Buy Now Pay Later · Payments · Japan · Checkout · Deferred Payments · Recurring Payments · Tokens
 
-### Paidy Checkout
+## Paidy on APIs.io
 
-JavaScript-based integration embedded in the merchant checkout page. Handles the consumer-facing authentication flow: the consumer enters their mobile number, receives an SMS verification code, and confirms the payment or creates a recurring payment token. Passes the resulting payment ID or token ID back to the merchant frontend via callback.
+Everything profiled for Paidy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paidy/](https://apis.io/providers/paidy/)** — or go straight to one of the APIs or properties below.
 
-- **Integration**: `<script src="https://apps.paidy.com/"></script>`
-- **Documentation**: https://paidy.com/docs/en/paidycheckout.html
+### APIs (3)
 
-### Paidy Payments API
+- [Paidy Checkout](https://apis.io/apis/paidy/paidy-checkout/) — JavaScript-based checkout integration that enables consumers to authenticate with Paidy and authorize payments or create recurring payment tokens directly…
+- [Paidy Payments API](https://apis.io/apis/paidy/paidy-payments-api/) — Manage payment authorizations, captures, refunds, updates, and closures.
+- [Paidy Tokens API](https://apis.io/apis/paidy/paidy-tokens-api/) — Manage recurring payment tokens for subscription billing.
 
-REST API for managing the full payment lifecycle. Base URL: `https://api.paidy.com`
+### Published properties
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/payments` | POST | Create a payment using a stored token |
-| `/payments/{id}/captures` | POST | Capture an authorized payment |
-| `/payments/{id}/refunds` | POST | Refund a captured payment (partial or full) |
-| `/payments/{id}` | GET | Retrieve payment details |
-| `/payments/{id}` | PUT | Update order reference, description, or metadata |
-| `/payments/{id}/close` | POST | Close an authorized but uncaptured payment |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Paidy Tokens API
+#### Agentic access (1)
 
-REST API for managing stored payment tokens for recurring billing.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/tokens/{id}/suspend` | POST | Suspend an active token |
-| `/tokens/{id}/resume` | POST | Resume a suspended token |
-| `/tokens/{id}/delete` | POST | Permanently delete a token |
-| `/tokens/{id}` | GET | Retrieve a specific token |
-| `/tokens/` | GET | Retrieve all active and suspended tokens |
+- [Paidy Agentic Access](https://apis.io/agentic-access/paidy/paidy-agentic-access/)
 
-## Authentication
+#### JSON Schema (2)
 
-Merchants receive four API keys via the Merchant Dashboard (`https://merchant.paidy.com/`):
-- **Secret keys** (`sk_` prefix): Used in `Authorization: Bearer <sk_key>` headers for API requests
-- **Public keys** (`pk_` prefix): Used in Paidy Checkout JavaScript configuration
-- Separate test and production keys are provided
+The data models the API reads and writes.
 
-All requests require HTTPS and `Paidy-Version: 2018-04-10` header.
+- [Payment](https://apis.io/schemas/paidy/payment/)
+- [Token](https://apis.io/schemas/paidy/token/)
 
-## Webhooks
+#### JSON-LD (1)
 
-Paidy sends HTTP POST notifications to registered merchant endpoints for the following events:
+Linked-data contexts for the provider's vocabulary.
 
-**Payment events**: `authorize_success`, `capture_success`, `close_success`, `refund_success`, `update_success`
+- [context Context](https://apis.io/jsonld/paidy/context/)
 
-**Token events**: `activate_success`, `suspend_success`, `resume_success`, `delete_success`
+#### Examples (6)
 
-Endpoints must respond within 10 seconds with HTTP 200. Failed deliveries are retried with exponential backoff up to approximately 5 hours.
+Example requests and responses.
 
-Whitelist Paidy IP addresses: `13.114.134.35`, `13.113.94.100`, `18.182.135.232`, `52.199.50.20`, `52.199.62.26`
+- [Capture Payment](https://apis.io/examples/paidy/capture-payment/)
+- [Create Payment](https://apis.io/examples/paidy/create-payment/)
+- [Payment Response](https://apis.io/examples/paidy/payment-response/)
+- [Refund Payment](https://apis.io/examples/paidy/refund-payment/)
+- [Suspend Token](https://apis.io/examples/paidy/suspend-token/)
+- [Token Response](https://apis.io/examples/paidy/token-response/)
 
-## Testing
+#### Collections (2)
 
-Use test API keys with these test credentials in Paidy Checkout:
-- **Successful payment**: email `successful.payment@paidy.com`, phone `08000000001`, auth code `8888`
-- **Failed payment**: email `rejected.payment@paidy.com`, phone `08000000001`, auth code `8888`
+Postman and Open Collection request collections.
 
-## Key Constraints
+- [Paidy Payments API](https://apis.io/collections/paidy/open-paidy-payments-api/)
+- [Paidy Payments Tokens API](https://apis.io/collections/paidy/open-paidy-tokens-api/)
 
-- Currency: **JPY only**
-- Encoding: **UTF-8** (required for Japanese characters)
-- TLS: **1.2 or higher** required
-- Metadata: **20 key-value pairs** maximum per object
-- API Version: **2018-04-10** (must be specified in request header)
+#### Governance rules (1)
 
-## Links
+Spectral rulesets for the provider's contracts.
 
-- **Documentation**: https://paidy.com/docs/en/
-- **API Reference**: https://paidy.com/docs/api/en/
-- **Merchant Dashboard**: https://merchant.paidy.com/
-- **Webhooks Guide**: https://paidy.com/docs/en/webhook.html
-- **API Changelog**: https://paidy.com/docs/en/updates.html
-- **Testing Guide**: https://paidy.com/docs/en/testing.html
+- [Paidy — jsonschema rules](https://apis.io/rules/paidy/paidy-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Paidy Authentication](https://apis.io/security/paidy/paidy-authentication/)
+- [Paidy Domain Security](https://apis.io/security/paidy/paidy-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/paidy/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/paidy/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/paidy/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.paidy.com/)
+- [Documentation](https://paidy.com/docs/en/)
+- [API reference](https://paidy.com/docs/api/en/)
+- [Changelog](https://paidy.com/docs/en/updates.html)
+- [Blog](https://corp.paidy.com/news/)
+- [Terms of service](https://paidy.com/merchant/)
+
+## API Evangelist rating
+
+**Kin Score 34.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 58.2 |
+| Contract governance | 9.8 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 15.8 |
+
+**Agent readiness 36.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | unknown |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 18.8** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paidy/](https://apis.io/providers/paidy/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Paidy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paidy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
